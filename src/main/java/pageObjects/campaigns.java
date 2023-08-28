@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.Date;
 import java.util.List;
 
 public class campaigns {
@@ -23,18 +24,8 @@ public class campaigns {
         return element;
     }
 
-    // Filter
-    public static WebElement btn_Filter() {
-        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[1]/div[2]/button[2]"));
-        return element;
-    }
 
-    public static WebElement btn_ResetAllFilter() {
-        element = driver.findElement(By.xpath("/html/body/div[3]/div[3]/div/div[2]/button[1]"));
-        return element;
-    }
-
-
+    // Input search by name
     public static WebElement input_SearchByName() {
         element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[1]/div[2]/div/div/fieldset/form/input"));
         return element;
@@ -45,8 +36,22 @@ public class campaigns {
         return element;
     }
 
+    // Panel filter
+    public static WebElement panel_Filter() {
+        element = driver.findElement(By.xpath("/html/body/div[2]/div[3]"));
+        return element;
+    }
+    public static WebElement btn_Filter() {
+        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[1]/div[2]/button[2]"));
+        return element;
+    }
+
+    public static WebElement btn_ResetAllFilter() {
+        element = driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/div[2]/button[1]"));
+        return element;
+    }
     public static WebElement btn_ApplyFilter() {
-        element = driver.findElement(By.xpath("//button[contains(text(),'Apply filters']"));
+        element = driver.findElement(By.xpath("/html/body/div[2]/div[3]/div/div[2]/button[2]"));
         return element;
     }
 
@@ -55,33 +60,34 @@ public class campaigns {
         return element;
     }
 
-    public static WebElement panel_Filter() {
-        element = driver.findElement(By.xpath("/html/body/div[3]/div[3]"));
-        return element;
-    }
+
 
 
 
     // Countries and Status
-    public static WebElement checkboxes_PanelFilter(String arg0) {
-        element = driver.findElement(By.xpath("input[@value="+arg0+"]//svg[@aria-hidden='true']"));
+    public static WebElement checkbox_PanelFilter(String arg0) {
+        element = driver.findElement(By.xpath("//input[@value='"+arg0+"']"));
         return element;
+    }
+
+    public static List<WebElement> checkboxes_checked() {
+        List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox'][@checked]"));
+        return checkboxes;
     }
 
 
     // Table_Filter
-    public static WebElement table_Filter() {
-        element = driver.findElement(By.xpath("//table[@class='MuiTable-root']"));
-        return element;
-    }
-
     public static List<WebElement> tableHeader_Column() {
-        webElementList = driver.findElements(By.xpath("//thead[@class='MuiTableHead-root']//th[@class='MuiTableCell-root']"));
+        webElementList = driver.findElements(By.xpath("//table/thead/tr/th/p"));
         return webElementList;
     }
 
+    public static List<WebElement> tableRow() {
+        webElementList = driver.findElements(By.xpath("//table/tbody/tr"));
+        return webElementList;
+    }
     public static List<WebElement> tableCell() {
-        webElementList = driver.findElements(By.xpath("//th[@class='MuiTableCell-root']"));
+        webElementList = driver.findElements(By.xpath("//table/tbody/tr/th"));
         return webElementList;
     }
 
@@ -109,19 +115,45 @@ public class campaigns {
 
     // Navigation
     public static WebElement arrow_LastPage() {
-        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav/ul/li[5]/button"));
+        element = driver.findElement(By.xpath("//button[@aria-label='Go to last page']"));
         return element;
     }
 
+    // No result
+    public static WebElement textNoResultLineOne() {
+        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[1]/table/tbody/tr/td/div/div/p[1]"));
+        return element;
+    }
+
+    public static WebElement textNoResultLineTwo() {
+        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[1]/table/tbody/tr/td/div/div/p[2]"));
+        return element;
+    }
+
+    // Counter result
+    public static List<WebElement> buttons_Navigation() {
+        webElementList = driver.findElements(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav/ul/li/button"));
+        return webElementList;
+    }
+
+    public static WebElement navigation() {
+        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav"));
+        return element;
+    }
+
+    public static WebElement counterResult() {
+        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/span"));
+        return element;
+    }
 
     public static void checkJustDisplayStatus(String arg0) {
-        if (table_Filter().isDisplayed()) {
+        if (tableCell().size() > 0) {
             int numberColumn = tableHeader_Column().size();
             for (int i = 0; i < numberColumn; i++) {
                 if (tableHeader_Column().get(i).getText().equals("Status")) {
                     int numberCell = tableCell().size();
-                    for (int j = i; j < numberCell; j += numberCell) {
-                        System.out.println(tableCell().get(j).getText().equals(arg0) ? "Just display the campaigns which on" + arg0 + "status" : "Error");
+                    for (int j = i; j < numberCell; j += numberColumn) {
+                        System.out.println(tableCell().get(j).getText().equals(arg0) ? "Passed" : "Failed");
                     }
                 }
             }
@@ -131,13 +163,13 @@ public class campaigns {
     }
 
     public static void checkJustDisplayCountry(String arg0) {
-        if (table_Filter().isDisplayed()) {
+        if (tableCell().size() > 0) {
             int numberColumn = tableHeader_Column().size();
             for (int i = 0; i < numberColumn; i++) {
                 if (tableHeader_Column().get(i).getText().equals("Country")) {
                     int numberCell = tableCell().size();
-                    for (int j = i; j < numberCell; j += numberCell) {
-                        System.out.println(tableCell().get(j).getText().equals(arg0) ? "Just display the campaigns which belong to the selected" + arg0 + "option" : "Error");
+                    for (int j = i; j < numberCell; j += numberColumn) {
+                        System.out.println(tableCell().get(j).getText().equals(arg0) ? "Passed" : "Failed");
                     }
                 }
             }
@@ -146,24 +178,20 @@ public class campaigns {
         }
     }
 
-    public static void checkRangeFinanceVolume(String actual, float fieldFromFinanceVolume,float fieldToFinanceVolume) {
-        if (table_Filter().isDisplayed()) {
+    public static void checkRangeFinanceVolume(float fieldFromFinanceVolume,float fieldToFinanceVolume) {
+        if (tableCell().size() > 0) {
             int numberColumn = tableHeader_Column().size();
             for (int i = 0; i < numberColumn; i++) {
                 if (tableHeader_Column().get(i).getText().equals("Finance vol.")) {
                     int numberCell = tableCell().size();
-                    for (int j = i; j < numberCell; j += numberCell) {
+                    for (int j = i; j < numberCell; j += numberColumn) {
                         String FinanceVolume = tableCell().get(j).getText();
                         String[] arrayList = FinanceVolume.substring(0, FinanceVolume.length() - 1).split(",");
-                        actual = "";
+                        String financeVolumeFilter = "";
                         for (int k = 0; k < arrayList.length; k++) {
-                            actual += arrayList[i];
+                            financeVolumeFilter += arrayList[k];
                         }
-                        if (fieldFromFinanceVolume < Integer.parseInt(actual) && Integer.parseInt(actual) < fieldToFinanceVolume) {
-                            System.out.println("Success");
-                        } else {
-                            System.out.println("Bug");
-                        }
+                        System.out.println(fieldFromFinanceVolume < Integer.parseInt(financeVolumeFilter) && Integer.parseInt(financeVolumeFilter) < fieldToFinanceVolume ? "Passed" : "Failed");
                     }
                 }
             }
@@ -172,24 +200,20 @@ public class campaigns {
         }
     }
 
-    public static void checkRangeInvestment(String actual, float fieldFromInvestment, float fieldToInvestment) {
-        if (table_Filter().isDisplayed()) {
+    public static void checkRangeInvestment(float fieldFromInvestment, float fieldToInvestment) {
+        if (tableCell().size() > 0) {
             int numberColumn = tableHeader_Column().size();
             for (int i = 0; i < numberColumn; i++) {
                 if (tableHeader_Column().get(i).getText().equals("Investment")) {
                     int numberCell = tableCell().size();
-                    for (int j = i; j < numberCell; j += numberCell) {
+                    for (int j = i; j < numberCell; j += numberColumn) {
                         String Investment = tableCell().get(j).getText();
                         String[] arrayList = Investment.substring(0, Investment.length() - 1).split(",");
-                        actual = "";
+                        String investmentFilter = "";
                         for (int k = 0; k < arrayList.length; k++) {
-                            actual += arrayList[i];
+                            investmentFilter += arrayList[k];
                         }
-                        if (fieldFromInvestment < Integer.parseInt(actual) && Integer.parseInt(actual) < fieldToInvestment) {
-                            System.out.println("Success");
-                        } else {
-                            System.out.println("Bug");
-                        }
+                        System.out.println(fieldFromInvestment < Integer.parseInt(investmentFilter) && Integer.parseInt(investmentFilter) < fieldToInvestment ? "Passed" : "Failed");
                     }
                 }
             }
@@ -199,19 +223,44 @@ public class campaigns {
     }
 
     public static void checkName(String name) {
-        if (table_Filter().isDisplayed()) {
+        if (tableCell().size() > 0) {
             int numberColumn = tableHeader_Column().size();
             for (int i = 0; i < numberColumn; i++) {
                 if (tableHeader_Column().get(i).getText().equals("Name")) {
                     int numberCell = tableCell().size();
-                    for (int j = i; j < numberCell; j += numberCell) {
-                        String Investment = tableCell().get(j).getText().toLowerCase();
-                        if(Investment.contains(name.toLowerCase())) {
-                            System.out.println("Table just display name follow input search name");
-                        }else {
-                            System.out.println("Error display not right");
-                        }
+                    for (int j = i; j < numberCell; j += numberColumn) {
+                        String nameFilter = tableCell().get(j).getText().toLowerCase();
+                        System.out.println(nameFilter.contains(name.toLowerCase()) ? "Passed" : "CheckSearchByName: Failed");;
+                    }
+                }
+            }
+        } else {
+            System.out.println("No result");
+        }
+    }
 
+    public static void checkDateCreatedOn() {
+
+        // Check table have result
+        if (tableCell().size() > 0) {
+            int numberColumn = tableHeader_Column().size();
+            for (int i = 0; i < numberColumn; i++) {
+
+                // Check column have header name
+                if (tableHeader_Column().get(i).getText().equals("Created on")) {
+                    int numberCell = tableCell().size();
+                    for (int j = i; j < numberCell; j += numberColumn) {
+                        String dateCreateOn = tableCell().get(j).getText();
+
+                        // Need write code than cleaner
+                        String dateCreateOn1 = tableCell().get((j+numberColumn) >= numberColumn ? (numberCell- (numberColumn - i)) : (j+numberColumn)).getText();
+
+                        // Check sort dateCreateOn decrease
+                        String[] array = dateCreateOn.split("\\.");
+                        String[] array1 = dateCreateOn1.split("\\.");
+                        Date dateBefore = new Date(Integer.parseInt(array[0]),Integer.parseInt(array[1]),Integer.parseInt(array[2]));
+                        Date dateAfter = new Date(Integer.parseInt(array1[0]),Integer.parseInt(array1[1]),Integer.parseInt(array1[2]));
+                        System.out.println(dateAfter.before(dateBefore) || dateAfter.equals(dateBefore) ? "Passed" : "Failed");
                     }
                 }
             }
