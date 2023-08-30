@@ -40,7 +40,7 @@ public class BrowserFactory {
     }
 
     private static WebDriver createChromeDriver() {
-        System.setProperty("webdriver.chrome.driver", "src/main/java/config/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/main/java/config/chromedriver.exe");
         return new ChromeDriver();
     }
 
