@@ -1,4 +1,4 @@
-Feature: You make campaigns
+Feature: List of campaigns
   Scenario Outline: CL006 User clicks the arrow button to collapse the filter
     Given User Logged in as Admin
     When User goes to the Campaign List View
