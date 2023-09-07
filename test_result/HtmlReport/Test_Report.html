@@ -33,7 +33,8 @@
 		<!-- slideout menu -->
 		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
 			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
-						<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+						<li class='waves-effect'><a href='#!' view='exception-view' onclick="configureView(2)"><i class='material-icons'>bug_report</i></a></li>
+			<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
 		</ul>
 
 		<!-- report name -->
@@ -46,7 +47,7 @@
 		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
 			<li>
                 <a href='#!'>
-                    <span class='label suite-start-time blue darken-3'>Aug 28, 2023 01:37:38 PM</span>
+                    <span class='label suite-start-time blue darken-3'>Sep 7, 2023 09:49:35 PM</span>
 				</a>
 			</li>
 			<li>
@@ -72,6 +73,8 @@
 				</a>
 				<ul id='tests-toggle' class='dropdown-content'>
 											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+						<li status='skip'><a href='#!'>Skip <i class='material-icons cyan-text'>redo</i></a></li>
 					<li class='divider'></li>
 					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
 				</ul>
@@ -122,10 +125,10 @@
 					<canvas id='parent-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>1</span> feature(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='0%'><span class='strong'>0</span> feature(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> feature(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='100%'>1</span> feature(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -137,10 +140,10 @@
 					<canvas id='child-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>7</span> scenario(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='73.529%'><span class='strong'>25</span> scenario(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> scenario(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='26.471%'>9</span> scenario(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
 				</div>
 			</div>
 		</div>
@@ -152,10 +155,10 @@
 					<canvas id='grandchild-analysis' width='100' height='80'></canvas>
 				</div>
 				<div class='block text-small'>
-					<span class='tooltipped' data-position='top' data-tooltip='100%'><span class='strong'>42</span> step(s) passed</span>
+					<span class='tooltipped' data-position='top' data-tooltip='93.939%'><span class='strong'>186</span> step(s) passed</span>
 				</div>
 				<div class='block text-small'>
-					<span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='0%'>0</span> others
+					<span class='strong tooltipped' data-position='top' data-tooltip='4.545%'>9</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='1.515%'>3</span> others
 				</div>
 			</div>
 		</div>
@@ -169,247 +172,1513 @@
 			<ul id='test-collection' class='test-collection'>
 				
 				
-				<li class='test displayed active has-leaf pass' status='pass' bdd='true' test-id='1'>
+				<li class='test displayed active has-leaf fail' status='fail' bdd='true' test-id='1'>
 					<div class='test-heading'>
-						<span class='test-name'>You make campaigns</span>
-						<span class='test-time'>Aug 28, 2023 01:37:39 PM</span>
-						<span class='test-status right pass'>pass</span>
+						<span class='test-name'>Create new Campaign</span>
+						<span class='test-time'>Sep 7, 2023 09:49:35 PM</span>
+						<span class='test-status right fail'>fail</span>
 					</div>
 					<div class='test-content hide'>
-<div class='scenariooutline node' test-id='2' status='pass'>
-	<span class='duration right label'>0h 1m 47s+426ms</span>
+<div class='scenario node' test-id='2' status='pass'>
+	<span class='duration right label'>0h 0m 9s+291ms</span>
 	<div class='desc'>
-		<b>ScenarioOutline</b>
-		<span class="desc-text">CL006 User clicks the arrow button to collapse the filter</span>
+		<b>Scenario</b>
+		<span class="desc-text">CP005 User clicks on the "Tranches" link on the right hand navigation to scroll to the Tranches zone</span>
 	</div>
 	<ul class='steps'>
-		<li test-id='3' class='node scenario pass' status='pass'>
+		<li test-id='3' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='4' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='5' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='6' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='7' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The UI will be scrolled to the Tranches zone</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='8' status='pass'>
+	<span class='duration right label'>0h 0m 8s+381ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CP006 User clicks on the "Campaign details" link on the right hand naviagtion to scroll to the Campaign zone</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='9' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='10' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='11' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='12' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='13' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Campaign details link at the right hand navigation</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='14' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The UI will be scrolled to the Campaign detail zone</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='15' status='pass'>
+	<span class='duration right label'>0h 0m 9s+350ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CP008 User tries to save the campaign as draft while missing many mandatory fields</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='16' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='17' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='18' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='19' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enters the data at fields but missing many madantory fields</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='20' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks Save as Draft button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='21' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The campaign will be successfully saved as Draft without any validation messages are shown up</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='22' status='pass'>
+	<span class='duration right label'>0h 0m 11s+578ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CP020 User tries to add more projects</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='23' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='24' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='25' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='26' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enters new data at the General Information tile</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='27' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add another project button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='28' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then A new Project field will be shown and it works in the same way with the first project field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='29' status='pass'>
+	<span class='duration right label'>0h 0m 10s+869ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CP021-CP024 User tries to enter characters into the Maximum finance volume field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='30' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='31' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='32' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='33' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enters characters into the Maximum finance volume field, Tenure field, Minimum finance volume field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='34' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then An error message will be shown as required user should enter numbers only at finance vol zone</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='35' status='pass'>
+	<span class='duration right label'>0h 0m 29s+654ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CP025-CP027&CP032-CP033 User tries to enter a number into the Maximum finance volume field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='36' class='node scenario pass' status='pass'>
 			
 			<b>Scenario</b>
 			
-			<span class="bdd-step-name">CL006 User clicks the arrow button to collapse the filter</span>
+			<span class="bdd-step-name">CP025-CP027&CP032-CP033 User tries to enter a number into the Maximum finance volume field</span>
 			
 				<ul class='steps'>
-					<li test-id='4' class='node given pass' status='pass'><b>Given</b>
+					<li test-id='37' class='node given pass' status='pass'><b>Given</b>
 						<span class="bdd-step-name">Given User Logged in as Admin</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='5' class='node when pass' status='pass'><b>When</b>
+					<li test-id='38' class='node when pass' status='pass'><b>When</b>
 						<span class="bdd-step-name">When User goes to the Campaign List View</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='6' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the dropdown filter button</span>
+					<li test-id='39' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='7' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And At the filter, user selects "Draft"</span>
+					<li test-id='40' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters a "99999" into the Maximum finance volume field</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='8' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the X button again</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='9' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then The filter panel will be hidden and the filter options won't be cleared</span>
+					<li test-id='41' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then The 'KIB' or 'VIB' option will be selected with right "99999" value</span>
 							<div class='pre'>passed</div>
 					</li>
 				</ul>
 		</li>
-		<li test-id='10' class='node scenario pass' status='pass'>
+		<li test-id='42' class='node scenario pass' status='pass'>
 			
 			<b>Scenario</b>
 			
-			<span class="bdd-step-name">CL006 User clicks the arrow button to collapse the filter</span>
+			<span class="bdd-step-name">CP025-CP027&CP032-CP033 User tries to enter a number into the Maximum finance volume field</span>
 			
 				<ul class='steps'>
-					<li test-id='11' class='node given pass' status='pass'><b>Given</b>
+					<li test-id='43' class='node given pass' status='pass'><b>Given</b>
 						<span class="bdd-step-name">Given User Logged in as Admin</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='12' class='node when pass' status='pass'><b>When</b>
+					<li test-id='44' class='node when pass' status='pass'><b>When</b>
 						<span class="bdd-step-name">When User goes to the Campaign List View</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='13' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the dropdown filter button</span>
+					<li test-id='45' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='14' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And At the filter, user selects "Ready to launch"</span>
+					<li test-id='46' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters a "100000" into the Maximum finance volume field</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='15' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the X button again</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='16' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then The filter panel will be hidden and the filter options won't be cleared</span>
+					<li test-id='47' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then The 'KIB' or 'VIB' option will be selected with right "100000" value</span>
 							<div class='pre'>passed</div>
 					</li>
 				</ul>
 		</li>
-		<li test-id='17' class='node scenario pass' status='pass'>
+		<li test-id='48' class='node scenario pass' status='pass'>
 			
 			<b>Scenario</b>
 			
-			<span class="bdd-step-name">CL006 User clicks the arrow button to collapse the filter</span>
+			<span class="bdd-step-name">CP025-CP027&CP032-CP033 User tries to enter a number into the Maximum finance volume field</span>
 			
 				<ul class='steps'>
-					<li test-id='18' class='node given pass' status='pass'><b>Given</b>
+					<li test-id='49' class='node given pass' status='pass'><b>Given</b>
 						<span class="bdd-step-name">Given User Logged in as Admin</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='19' class='node when pass' status='pass'><b>When</b>
+					<li test-id='50' class='node when pass' status='pass'><b>When</b>
 						<span class="bdd-step-name">When User goes to the Campaign List View</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='20' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the dropdown filter button</span>
+					<li test-id='51' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='21' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And At the filter, user selects "Active"</span>
+					<li test-id='52' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters a "100001" into the Maximum finance volume field</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='22' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the X button again</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='23' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then The filter panel will be hidden and the filter options won't be cleared</span>
+					<li test-id='53' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then The 'KIB' or 'VIB' option will be selected with right "100001" value</span>
 							<div class='pre'>passed</div>
 					</li>
 				</ul>
 		</li>
-		<li test-id='24' class='node scenario pass' status='pass'>
+	</ul>
+</div>
+<div class='scenario node' test-id='54' status='pass'>
+	<span class='duration right label'>0h 0m 7s+186ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CP028 User tries to change the option at the KIB/VIB radio button</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='55' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='56' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='57' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='58' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The 'KIB/VIB' is read only field and user can't change the option</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='59' status='pass'>
+	<span class='duration right label'>0h 0m 16s+114ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CP029-CP037 User tries to enter characters into the amount field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='60' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='61' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='62' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='63' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enters the new data at Minimum amount field, Maximum amount field, Divisible amount field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='64' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then Check validity data the fields at Individual investment zone</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='65' status='pass'>
+	<span class='duration right label'>0h 0m 7s+230ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CP038-CP039 User Selects Annuity and Bullet field and doesn't enter the madantory fields</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='66' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='67' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='68' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='69' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Selects Annuity and Bullet field or Constant field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='70' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Doesn't enter the madantory fields</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='71' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then An error message will be shown as required field</span>
+				<div class='pre'>undefined</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='72' status='pass'>
+	<span class='duration right label'>0h 0m 10s+544ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CP040-CP042 User tries to enter characters into the Annuity field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='73' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='74' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='75' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='76' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Enters the characters into the Annuity field and Bullet field, Constant field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='77' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then An error message will be shown as required user should enter numbers only at Repayment zone</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='78' status='fail'>
+	<span class='duration right label'>0h 0m 14s+980ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CP043-CP044 User tries to enter a number into the Annuity field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='79' class='node scenario fail' status='fail'>
 			
 			<b>Scenario</b>
 			
-			<span class="bdd-step-name">CL006 User clicks the arrow button to collapse the filter</span>
+			<span class="bdd-step-name">CP043-CP044 User tries to enter a number into the Annuity field</span>
 			
 				<ul class='steps'>
-					<li test-id='25' class='node given pass' status='pass'><b>Given</b>
+					<li test-id='80' class='node given pass' status='pass'><b>Given</b>
 						<span class="bdd-step-name">Given User Logged in as Admin</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='26' class='node when pass' status='pass'><b>When</b>
+					<li test-id='81' class='node when pass' status='pass'><b>When</b>
 						<span class="bdd-step-name">When User goes to the Campaign List View</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='27' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the dropdown filter button</span>
+					<li test-id='82' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='28' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And At the filter, user selects "Closed"</span>
+					<li test-id='83' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enter a "101" into the Annuity field</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='29' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the X button again</span>
+					<li test-id='84' class='node then fail' status='fail'><b>Then</b>
+						<span class="bdd-step-name">Then Check validity data the Annuity field when enter a "101"</span>
+							<div class='pre'><textarea>org.junit.ComparisonFailure: expected:<[User can't enters number greater than 100]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheAnnuityFieldWhenEnterA(CreateNewCampaign_Steps.java:267)
+	at ✽.Then Check validity data the Annuity field when enter a "101"(src/main/java/features/CreateNewCampaign.feature:86)
+</textarea></div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='85' class='node scenario fail' status='fail'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CP043-CP044 User tries to enter a number into the Annuity field</span>
+			
+				<ul class='steps'>
+					<li test-id='86' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='30' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then The filter panel will be hidden and the filter options won't be cleared</span>
+					<li test-id='87' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='88' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='89' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enter a "-100" into the Annuity field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='90' class='node then fail' status='fail'><b>Then</b>
+						<span class="bdd-step-name">Then Check validity data the Annuity field when enter a "-100"</span>
+							<div class='pre'><textarea>org.junit.ComparisonFailure: expected:<[The minimum number is 0 and can't enters a smaller number]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheAnnuityFieldWhenEnterA(CreateNewCampaign_Steps.java:271)
+	at ✽.Then Check validity data the Annuity field when enter a "-100"(src/main/java/features/CreateNewCampaign.feature:86)
+</textarea></div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='91' status='fail'>
+	<span class='duration right label'>0h 0m 15s+182ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CP045-CP046 User tries to enter a number into the Bullet field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='92' class='node scenario fail' status='fail'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CP045-CP046 User tries to enter a number into the Bullet field</span>
+			
+				<ul class='steps'>
+					<li test-id='93' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='94' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='95' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='96' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enter a "101" into the Bullet field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='97' class='node then fail' status='fail'><b>Then</b>
+						<span class="bdd-step-name">Then Check validity data the Bullet field when enter a "101"</span>
+							<div class='pre'><textarea>org.junit.ComparisonFailure: expected:<[User can't enters number greater than 100]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheBulletFieldWhenEnterA(CreateNewCampaign_Steps.java:285)
+	at ✽.Then Check validity data the Bullet field when enter a "101"(src/main/java/features/CreateNewCampaign.feature:98)
+</textarea></div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='98' class='node scenario fail' status='fail'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CP045-CP046 User tries to enter a number into the Bullet field</span>
+			
+				<ul class='steps'>
+					<li test-id='99' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='100' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='101' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='102' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enter a "-100" into the Bullet field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='103' class='node then fail' status='fail'><b>Then</b>
+						<span class="bdd-step-name">Then Check validity data the Bullet field when enter a "-100"</span>
+							<div class='pre'><textarea>org.junit.ComparisonFailure: expected:<[The minimum number is 0 and can't enters a smaller number]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheBulletFieldWhenEnterA(CreateNewCampaign_Steps.java:289)
+	at ✽.Then Check validity data the Bullet field when enter a "-100"(src/main/java/features/CreateNewCampaign.feature:98)
+</textarea></div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='104' status='pass'>
+	<span class='duration right label'>0h 0m 9s+301ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CP047 User tries to enter numbers into the Annuity and Bullet which added together will be greater than 100</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='105' class='node scenario pass' status='pass'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CP047 User tries to enter numbers into the Annuity and Bullet which added together will be greater than 100</span>
+			
+				<ul class='steps'>
+					<li test-id='106' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='107' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='108' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='109' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enter "45" into the Annuity field and "55" into the Bullet field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='110' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then An error message will be shown as the total of the values entered in the Annuity field and the Bullet field must equal 100</span>
 							<div class='pre'>passed</div>
 					</li>
 				</ul>
 		</li>
-		<li test-id='31' class='node scenario pass' status='pass'>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='111' status='fail'>
+	<span class='duration right label'>0h 0m 17s+22ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CP048-CP049 User tries to enter a number into the Constant field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='112' class='node scenario fail' status='fail'>
 			
 			<b>Scenario</b>
 			
-			<span class="bdd-step-name">CL006 User clicks the arrow button to collapse the filter</span>
+			<span class="bdd-step-name">CP048-CP049 User tries to enter a number into the Constant field</span>
 			
 				<ul class='steps'>
-					<li test-id='32' class='node given pass' status='pass'><b>Given</b>
+					<li test-id='113' class='node given pass' status='pass'><b>Given</b>
 						<span class="bdd-step-name">Given User Logged in as Admin</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='33' class='node when pass' status='pass'><b>When</b>
+					<li test-id='114' class='node when pass' status='pass'><b>When</b>
 						<span class="bdd-step-name">When User goes to the Campaign List View</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='34' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the dropdown filter button</span>
+					<li test-id='115' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='35' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And At the filter, user selects "Fully funded"</span>
+					<li test-id='116' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enter a "101" into the Constant field</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='36' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the X button again</span>
+					<li test-id='117' class='node then fail' status='fail'><b>Then</b>
+						<span class="bdd-step-name">Then Check validity data the Constant field when enter a "101"</span>
+							<div class='pre'><textarea>org.junit.ComparisonFailure: expected:<[User can't enters number greater than 100]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheConstantFieldWhenEnterA(CreateNewCampaign_Steps.java:328)
+	at ✽.Then Check validity data the Constant field when enter a "101"(src/main/java/features/CreateNewCampaign.feature:122)
+</textarea></div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='118' class='node scenario fail' status='fail'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CP048-CP049 User tries to enter a number into the Constant field</span>
+			
+				<ul class='steps'>
+					<li test-id='119' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='37' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then The filter panel will be hidden and the filter options won't be cleared</span>
+					<li test-id='120' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='121' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='122' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enter a "-100" into the Constant field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='123' class='node then fail' status='fail'><b>Then</b>
+						<span class="bdd-step-name">Then Check validity data the Constant field when enter a "-100"</span>
+							<div class='pre'><textarea>org.junit.ComparisonFailure: expected:<[The minimum number is 0 and can't enters a smaller number]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheConstantFieldWhenEnterA(CreateNewCampaign_Steps.java:332)
+	at ✽.Then Check validity data the Constant field when enter a "-100"(src/main/java/features/CreateNewCampaign.feature:122)
+</textarea></div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='124' status='fail'>
+	<span class='duration right label'>0h 0m 20s+106ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CP053-CP055 User tries to enter the past date into the fields at Repayment dates zone</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='125' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='126' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='127' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='128' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on the date fields and enter a past date into fields</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='129' class='node then fail' status='fail'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then An error message will be displayed as cannot enter a past date into this field</span>
+				<div class='pre'><textarea>org.junit.ComparisonFailure: expected:<[Cannot enter a past date into this field]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.anErrorMessageWillBeDisplayedAsCannotEnterAPastDateIntoThisField(CreateNewCampaign_Steps.java:341)
+	at ✽.Then An error message will be displayed as cannot enter a past date into this field(src/main/java/features/CreateNewCampaign.feature:134)
+</textarea></div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='130' status='pass'>
+	<span class='duration right label'>0h 0m 11s+667ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CP065 Check the validation of KIB campaign</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='131' class='node scenario pass' status='pass'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CP065 Check the validation of KIB campaign</span>
+			
+				<ul class='steps'>
+					<li test-id='132' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='133' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='134' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='135' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters a "99999" into the Maximum finance volume field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='136' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then The front-end review has been completed passed and The plausibility check has been completed and passed</span>
 							<div class='pre'>passed</div>
 					</li>
 				</ul>
 		</li>
-		<li test-id='38' class='node scenario pass' status='pass'>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='137' status='pass'>
+	<span class='duration right label'>0h 0m 11s+742ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CP066 Check the validation of VIB campaign</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='138' class='node scenario pass' status='pass'>
 			
 			<b>Scenario</b>
 			
-			<span class="bdd-step-name">CL006 User clicks the arrow button to collapse the filter</span>
+			<span class="bdd-step-name">CP066 Check the validation of VIB campaign</span>
 			
 				<ul class='steps'>
-					<li test-id='39' class='node given pass' status='pass'><b>Given</b>
+					<li test-id='139' class='node given pass' status='pass'><b>Given</b>
 						<span class="bdd-step-name">Given User Logged in as Admin</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='40' class='node when pass' status='pass'><b>When</b>
+					<li test-id='140' class='node when pass' status='pass'><b>When</b>
 						<span class="bdd-step-name">When User goes to the Campaign List View</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='41' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the dropdown filter button</span>
+					<li test-id='141' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='42' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And At the filter, user selects "Part funded"</span>
+					<li test-id='142' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters a "100001" into the Maximum finance volume field</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='43' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the X button again</span>
-							<div class='pre'>passed</div>
-					</li>
-					<li test-id='44' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then The filter panel will be hidden and the filter options won't be cleared</span>
+					<li test-id='143' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then The VIB document has been approved, The front-end review has been completed passed and The plausibility check has been completed and passed</span>
 							<div class='pre'>passed</div>
 					</li>
 				</ul>
 		</li>
-		<li test-id='45' class='node scenario pass' status='pass'>
+	</ul>
+</div>
+<div class='scenario node' test-id='144' status='pass'>
+	<span class='duration right label'>0h 0m 10s+432ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CT008 User tries to submit form without entering data at the Tranche name filed</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='145' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='146' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='147' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='148' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='149' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click Add a tranche button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='150' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Doesn't enter the data at the Tranche name</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='151' class='node and skip' status='skip'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click submit button</span>
+				<div class='pre'>undefined</div>
+			
+		</li>
+		<li test-id='152' class='node then skip' status='skip'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then The error message will be shown as required field please enter</span>
+				<div class='pre'>undefined</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenario node' test-id='153' status='pass'>
+	<span class='duration right label'>0h 0m 11s+622ms</span>
+	<div class='desc'>
+		<b>Scenario</b>
+		<span class="desc-text">CT017-CT018 User selectes the option at the Platform field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='154' class='node given pass' status='pass'>
+			
+			<b>Given</b>
+			
+			<span class="bdd-step-name">Given User Logged in as Admin</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='155' class='node when pass' status='pass'>
+			
+			<b>When</b>
+			
+			<span class="bdd-step-name">When User goes to the Campaign List View</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='156' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Add campaign button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='157' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='158' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Click Add a tranche button</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='159' class='node and pass' status='pass'>
+			
+			<b>And</b>
+			
+			<span class="bdd-step-name">And Selectes the option at the Platform field</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+		<li test-id='160' class='node then pass' status='pass'>
+			
+			<b>Then</b>
+			
+			<span class="bdd-step-name">Then There are 2 options as: Ecoligo and CrowdForClimate Austria</span>
+				<div class='pre'>passed</div>
+			
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='161' status='fail'>
+	<span class='duration right label'>0h 0m 52s+45ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CT019-CT022 User tries to enter data into the Interest rate field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='162' class='node scenario pass' status='pass'>
 			
 			<b>Scenario</b>
 			
-			<span class="bdd-step-name">CL006 User clicks the arrow button to collapse the filter</span>
+			<span class="bdd-step-name">CT019-CT022 User tries to enter data into the Interest rate field</span>
 			
 				<ul class='steps'>
-					<li test-id='46' class='node given pass' status='pass'><b>Given</b>
+					<li test-id='163' class='node given pass' status='pass'><b>Given</b>
 						<span class="bdd-step-name">Given User Logged in as Admin</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='47' class='node when pass' status='pass'><b>When</b>
+					<li test-id='164' class='node when pass' status='pass'><b>When</b>
 						<span class="bdd-step-name">When User goes to the Campaign List View</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='48' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the dropdown filter button</span>
+					<li test-id='165' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='49' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And At the filter, user selects "Not funded"</span>
+					<li test-id='166' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='50' class='node and pass' status='pass'><b>And</b>
-						<span class="bdd-step-name">And Clicks on the X button again</span>
+					<li test-id='167' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
 							<div class='pre'>passed</div>
 					</li>
-					<li test-id='51' class='node then pass' status='pass'><b>Then</b>
-						<span class="bdd-step-name">Then The filter panel will be hidden and the filter options won't be cleared</span>
+					<li test-id='168' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "TEST" into the Interest rate field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='169' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Interest rate field with "TEST"</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='170' class='node scenario pass' status='pass'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CT019-CT022 User tries to enter data into the Interest rate field</span>
+			
+				<ul class='steps'>
+					<li test-id='171' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='172' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='173' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='174' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='175' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='176' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "0" into the Interest rate field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='177' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Interest rate field with "0"</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='178' class='node scenario pass' status='pass'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CT019-CT022 User tries to enter data into the Interest rate field</span>
+			
+				<ul class='steps'>
+					<li test-id='179' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='180' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='181' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='182' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='183' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='184' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "100000" into the Interest rate field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='185' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Interest rate field with "100000"</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='186' class='node scenario fail' status='fail'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CT019-CT022 User tries to enter data into the Interest rate field</span>
+			
+				<ul class='steps'>
+					<li test-id='187' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='188' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='189' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='190' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='191' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='192' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "" into the Interest rate field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='193' class='node then fail' status='fail'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Interest rate field with ""</span>
+							<div class='pre'><pre>java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:592)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at stepDefinition.CreateNewCampaign_Steps.checkTheValidationOfInterestRateFieldWith(CreateNewCampaign_Steps.java:479)
+	at ✽.Then Check the validation of Interest rate field with ""(src/main/java/features/CreateNewCampaign.feature:185)
+</pre></div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='194' status='pass'>
+	<span class='duration right label'>0h 0m 39s+123ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CT023-CT025 User tries to enter data into the Bonus amount field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='195' class='node scenario pass' status='pass'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CT023-CT025 User tries to enter data into the Bonus amount field</span>
+			
+				<ul class='steps'>
+					<li test-id='196' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='197' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='198' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='199' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='200' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='201' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "TEST" into the Bonus amount field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='202' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Bonus amount field with "TEST"</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='203' class='node scenario pass' status='pass'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CT023-CT025 User tries to enter data into the Bonus amount field</span>
+			
+				<ul class='steps'>
+					<li test-id='204' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='205' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='206' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='207' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='208' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='209' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "0" into the Bonus amount field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='210' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Bonus amount field with "0"</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='211' class='node scenario pass' status='pass'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CT023-CT025 User tries to enter data into the Bonus amount field</span>
+			
+				<ul class='steps'>
+					<li test-id='212' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='213' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='214' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='215' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='216' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='217' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "100000" into the Bonus amount field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='218' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Bonus amount field with "100000"</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+	</ul>
+</div>
+<div class='scenariooutline node' test-id='219' status='fail'>
+	<span class='duration right label'>0h 0m 38s+831ms</span>
+	<div class='desc'>
+		<b>ScenarioOutline</b>
+		<span class="desc-text">CT026-CT028 User tries to enter data into the Annuity factor field</span>
+	</div>
+	<ul class='steps'>
+		<li test-id='220' class='node scenario fail' status='fail'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CT026-CT028 User tries to enter data into the Annuity factor field</span>
+			
+				<ul class='steps'>
+					<li test-id='221' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='222' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='223' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='224' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='225' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='226' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "TEST" into the Annuity factor field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='227' class='node then fail' status='fail'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Annuity factor field "TEST"</span>
+							<div class='pre'><textarea>org.junit.ComparisonFailure: expected:<[Please enter a number.]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkTheValidationOfAnnuityFactorField(CreateNewCampaign_Steps.java:521)
+	at ✽.Then Check the validation of Annuity factor field "TEST"(src/main/java/features/CreateNewCampaign.feature:216)
+</textarea></div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='228' class='node scenario pass' status='pass'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CT026-CT028 User tries to enter data into the Annuity factor field</span>
+			
+				<ul class='steps'>
+					<li test-id='229' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='230' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='231' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='232' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='233' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='234' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "0" into the Annuity factor field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='235' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Annuity factor field "0"</span>
+							<div class='pre'>passed</div>
+					</li>
+				</ul>
+		</li>
+		<li test-id='236' class='node scenario pass' status='pass'>
+			
+			<b>Scenario</b>
+			
+			<span class="bdd-step-name">CT026-CT028 User tries to enter data into the Annuity factor field</span>
+			
+				<ul class='steps'>
+					<li test-id='237' class='node given pass' status='pass'><b>Given</b>
+						<span class="bdd-step-name">Given User Logged in as Admin</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='238' class='node when pass' status='pass'><b>When</b>
+						<span class="bdd-step-name">When User goes to the Campaign List View</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='239' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Add campaign button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='240' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Clicks on Tranches link at the right hand navigation</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='241' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Click Add a tranche button</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='242' class='node and pass' status='pass'><b>And</b>
+						<span class="bdd-step-name">And Enters "100000" into the Annuity factor field</span>
+							<div class='pre'>passed</div>
+					</li>
+					<li test-id='243' class='node then pass' status='pass'><b>Then</b>
+						<span class="bdd-step-name">Then Check the validation of Annuity factor field "100000"</span>
 							<div class='pre'>passed</div>
 					</li>
 				</ul>
@@ -444,6 +1713,174 @@
 </div>
 <!-- test view -->
 <!-- category view -->
+<div id='exception-view' class='view hide'>
+
+    <section id='controls'>
+        <div class='controls grey lighten-4'>
+            <!-- search -->
+            <div class='chip transparent' alt='Search Tests' title='Search Tests'>
+                <a href="#" class='search-div'>
+                    <i class='material-icons'>search</i> Search
+                </a>
+
+                <div class='input-field left hide'>
+                    <input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+                </div>
+
+            </div>
+            <!-- search -->
+        </div>
+    </section>
+
+    <div class='subview-left left'>
+
+        <div class='view-summary'>
+            <h5>Exceptions</h3>
+                <ul id='exception-collection' class='exception-collection'>
+
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>org.junit.ComparisonFailure</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>8</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>Sep 7, 2023 09:51:49 PM</td>
+                                                        <td class='linked' test-id='84'>Create new Campaign.CP043-CP044 User tries to enter a number into the Annuity field.CP043-CP044 User tries to enter a number into the Annuity field.Then Check validity data the Annuity field when enter a "101"</td>
+                                                        <td><pre><textarea>org.junit.ComparisonFailure: expected:<[User can't enters number greater than 100]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheAnnuityFieldWhenEnterA(CreateNewCampaign_Steps.java:267)
+	at ✽.Then Check validity data the Annuity field when enter a "101"(src/main/java/features/CreateNewCampaign.feature:86)
+</textarea></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 7, 2023 09:51:57 PM</td>
+                                                        <td class='linked' test-id='90'>Create new Campaign.CP043-CP044 User tries to enter a number into the Annuity field.CP043-CP044 User tries to enter a number into the Annuity field.Then Check validity data the Annuity field when enter a "-100"</td>
+                                                        <td><pre><textarea>org.junit.ComparisonFailure: expected:<[The minimum number is 0 and can't enters a smaller number]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheAnnuityFieldWhenEnterA(CreateNewCampaign_Steps.java:271)
+	at ✽.Then Check validity data the Annuity field when enter a "-100"(src/main/java/features/CreateNewCampaign.feature:86)
+</textarea></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 7, 2023 09:52:05 PM</td>
+                                                        <td class='linked' test-id='97'>Create new Campaign.CP045-CP046 User tries to enter a number into the Bullet field.CP045-CP046 User tries to enter a number into the Bullet field.Then Check validity data the Bullet field when enter a "101"</td>
+                                                        <td><pre><textarea>org.junit.ComparisonFailure: expected:<[User can't enters number greater than 100]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheBulletFieldWhenEnterA(CreateNewCampaign_Steps.java:285)
+	at ✽.Then Check validity data the Bullet field when enter a "101"(src/main/java/features/CreateNewCampaign.feature:98)
+</textarea></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 7, 2023 09:52:13 PM</td>
+                                                        <td class='linked' test-id='103'>Create new Campaign.CP045-CP046 User tries to enter a number into the Bullet field.CP045-CP046 User tries to enter a number into the Bullet field.Then Check validity data the Bullet field when enter a "-100"</td>
+                                                        <td><pre><textarea>org.junit.ComparisonFailure: expected:<[The minimum number is 0 and can't enters a smaller number]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheBulletFieldWhenEnterA(CreateNewCampaign_Steps.java:289)
+	at ✽.Then Check validity data the Bullet field when enter a "-100"(src/main/java/features/CreateNewCampaign.feature:98)
+</textarea></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 7, 2023 09:52:31 PM</td>
+                                                        <td class='linked' test-id='117'>Create new Campaign.CP048-CP049 User tries to enter a number into the Constant field.CP048-CP049 User tries to enter a number into the Constant field.Then Check validity data the Constant field when enter a "101"</td>
+                                                        <td><pre><textarea>org.junit.ComparisonFailure: expected:<[User can't enters number greater than 100]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheConstantFieldWhenEnterA(CreateNewCampaign_Steps.java:328)
+	at ✽.Then Check validity data the Constant field when enter a "101"(src/main/java/features/CreateNewCampaign.feature:122)
+</textarea></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 7, 2023 09:52:40 PM</td>
+                                                        <td class='linked' test-id='123'>Create new Campaign.CP048-CP049 User tries to enter a number into the Constant field.CP048-CP049 User tries to enter a number into the Constant field.Then Check validity data the Constant field when enter a "-100"</td>
+                                                        <td><pre><textarea>org.junit.ComparisonFailure: expected:<[The minimum number is 0 and can't enters a smaller number]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkValidityDataTheConstantFieldWhenEnterA(CreateNewCampaign_Steps.java:332)
+	at ✽.Then Check validity data the Constant field when enter a "-100"(src/main/java/features/CreateNewCampaign.feature:122)
+</textarea></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 7, 2023 09:53:01 PM</td>
+                                                        <td class='linked' test-id='129'>Create new Campaign.CP053-CP055 User tries to enter the past date into the fields at Repayment dates zone.Then An error message will be displayed as cannot enter a past date into this field</td>
+                                                        <td><pre><textarea>org.junit.ComparisonFailure: expected:<[Cannot enter a past date into this field]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.anErrorMessageWillBeDisplayedAsCannotEnterAPastDateIntoThisField(CreateNewCampaign_Steps.java:341)
+	at ✽.Then An error message will be displayed as cannot enter a past date into this field(src/main/java/features/CreateNewCampaign.feature:134)
+</textarea></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sep 7, 2023 09:55:35 PM</td>
+                                                        <td class='linked' test-id='227'>Create new Campaign.CT026-CT028 User tries to enter data into the Annuity factor field.CT026-CT028 User tries to enter data into the Annuity factor field.Then Check the validation of Annuity factor field "TEST"</td>
+                                                        <td><pre><textarea>org.junit.ComparisonFailure: expected:<[Please enter a number.]> but was:<[]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at stepDefinition.CreateNewCampaign_Steps.checkTheValidationOfAnnuityFactorField(CreateNewCampaign_Steps.java:521)
+	at ✽.Then Check the validation of Annuity factor field "TEST"(src/main/java/features/CreateNewCampaign.feature:216)
+</textarea></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>java.lang.NumberFormatException</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>1</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>Sep 7, 2023 09:54:42 PM</td>
+                                                        <td class='linked' test-id='193'>Create new Campaign.CT019-CT022 User tries to enter data into the Interest rate field.CT019-CT022 User tries to enter data into the Interest rate field.Then Check the validation of Interest rate field with ""</td>
+                                                        <td><pre><pre>java.lang.NumberFormatException: For input string: ""
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:592)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at stepDefinition.CreateNewCampaign_Steps.checkTheValidationOfInterestRateFieldWith(CreateNewCampaign_Steps.java:479)
+	at ✽.Then Check the validation of Interest rate field with ""(src/main/java/features/CreateNewCampaign.feature:185)
+</pre></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                </ul>
+        </div>
+    </div>
+
+    <div class='subview-right left'>
+        <div class='view-summary'>
+            <h5 class='exception-name'></h5>
+        </div>
+    </div>
+</div>
 <!-- exception view -->
 <div id='dashboard-view' class='view hide'>
 	<div class='card-panel transparent np-v'>
@@ -459,31 +1896,31 @@
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Scenarios
-					<div class='panel-lead'>7</div>
+					<div class='panel-lead'>34</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Steps
-					<div class='panel-lead'>42</div>
+					<div class='panel-lead'>198</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Start
-					<div class='panel-lead'>Aug 28, 2023 01:37:38 PM</div>
+					<div class='panel-lead'>Sep 7, 2023 09:49:35 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 			 		End
-			 		<div class='panel-lead'>Aug 28, 2023 01:39:27 PM</div>
+			 		<div class='panel-lead'>Sep 7, 2023 09:56:02 PM</div>
 				</div>
 			</div>
 			<div class='col s2'>
 				<div class='card-panel r'>
 					Time Taken
-					<div class='panel-lead'>108,168ms</div>
+					<div class='panel-lead'>386,812ms</div>
 				</div>
 			</div>
 		</div>
@@ -496,31 +1933,31 @@
 
 		<script>
 			var statusGroup = {
-				passParent: 1,
-				failParent: 0,
+				passParent: 0,
+				failParent: 1,
 				fatalParent: 0,
 				errorParent: 0,
 				warningParent: 0,
 				skipParent: 0,
-				exceptionsParent: 0,
+				exceptionsParent: 1,
 				
-				passChild: 7,
-				failChild: 0,
+				passChild: 25,
+				failChild: 9,
 				fatalChild: 0,
 				errorChild: 0,
 				warningChild: 0,
 				skipChild: 0,
 				infoChild: 0,
-				exceptionsChild: 0,
+				exceptionsChild: 9,
 				
-				passGrandChild: 42,
-				failGrandChild: 0,
+				passGrandChild: 186,
+				failGrandChild: 9,
 				fatalGrandChild: 0,
 				errorGrandChild: 0,
 				warningGrandChild: 0,
-				skipGrandChild: 0,
+				skipGrandChild: 3,
 				infoGrandChild: 0,
-				exceptionsGrandChild: 0,
+				exceptionsGrandChild: 12,
 			};
 		</script>
 		

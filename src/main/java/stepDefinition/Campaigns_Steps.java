@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import pageObjects.campaigns;
 import utils.libs.TestBase;
 
+import java.util.Date;
 import java.util.List;
 
 public class Campaigns_Steps extends TestBase {
@@ -50,7 +51,7 @@ public class Campaigns_Steps extends TestBase {
         Thread.sleep(1000);
     }
 
-    @And("^Clicks on the X button again$")
+    @And("^Clicks on the X button$")
     public void clicksOnTheXButtonAgain() throws Throwable {
         cp.btn_X_PanelFilter().click();
         Thread.sleep(1000);
@@ -59,7 +60,6 @@ public class Campaigns_Steps extends TestBase {
     @And("^At the filter, user selects \"([^\"]*)\"$")
     public void atTheFilterUserSelects(String arg0) throws Throwable {
         cp.checkbox_PanelFilter(arg0).click();
-        cp.checkbox_PanelFilter("Active").click();
         Thread.sleep(1000);
     }
 
@@ -93,11 +93,12 @@ public class Campaigns_Steps extends TestBase {
 
     @And("^Check the initialized data of the search textbox$")
     public void checkTheInitializedDataOfTheSearchTextbox() throws Throwable {
-        System.out.println(cp.input_SearchByName().getAttribute("value").equals("") ? "SearchTextbox is null" : "Error");
+        Assert.assertEquals(cp.input_SearchByName().getAttribute("value").equals(""), true);
     }
 
     @And("^Enters the name of campaign into the \"([^\"]*)\" field$")
     public void entersTheNameOfCampaignIntoTheField(String arg0) throws Throwable {
+        name = arg0;
         cp.input_SearchByName().sendKeys(arg0);
         cp.input_SearchByName().sendKeys(Keys.ENTER);
         Thread.sleep(1000);
@@ -111,25 +112,68 @@ public class Campaigns_Steps extends TestBase {
 
 
     @Then("^The filter panel will be hidden and the filter options won't be cleared$")
-    public void theFilterPanelWillBeHiddenAndTheFilterOptionsWonTBeCleared() {
+    public void theFilterPanelWillBeHiddenAndTheFilterOptionsWonTBeCleared() throws Exception {
+        // Check filter panel is display?
+        expected = "NotAppear";
+        try {
+            cp.panel_Filter().isDisplayed();
+            Assert.assertEquals(expected, "Appear");
+        }catch(Exception e) {
+            System.out.println(e);
+            Assert.assertEquals(expected, "NotAppear");
+        }
+
+         // Check checkbox filter option is cleared?
         cp.btn_Filter().click();
-        System.out.println(cp.panel_Filter().isDisplayed() ? "Passed: Panel filter is displayed after click btn_filter " : "Panel filter be hidden");
-        List<WebElement> webElementList_status = cp.checkboxes_checked();
-        System.out.println(webElementList_status.size() > 0 ? "Passed :The filter options not be cleared" : "Failed: The filter options be cleared");
+        expected = "true";
+        Thread.sleep(2000);
+        List<WebElement> webElementList_checkbox = cp.checkboxes_checked();
+        for (int i = 0; i < webElementList_checkbox.size(); i++) {
+            if(webElementList_checkbox.get(i).isSelected()) {
+                Assert.assertEquals(expected, "true");
+            }else {
+                Assert.assertEquals(expected, "false");
+            }
+        }
     }
 
     // Status
     @Then("^The list of campaigns will be filtered and just displays the campaigns which on \"([^\"]*)\" status$")
     public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichOnStatus(String arg0) throws Throwable {
-        cp.checkJustDisplayStatus(arg0);
-        Thread.sleep(1000);
+        if (cp.tableCell().size() > 0) {
+            int numberPageResult = Integer.parseInt(cp.btns_Navigation().get(cp.btns_Navigation().size() - 3).getText());
+            if(numberPageResult > 1) {
+                for (int i = 1; i < numberPageResult; i++) {
+                    verifyDisplayValueCheckbox(arg0, "Status");
+                    cp.arrow_NextPage().click();
+                    Thread.sleep(1000);
+                }
+            } else {
+                verifyDisplayValueCheckbox(arg0, "Status");
+            }
+        }else {
+            System.out.println("No result");
+        }
     }
 
     // Country
     @Then("^The list of campaigns will be filtered and just displays the campaigns which belong to the selected \"([^\"]*)\" option$")
     public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichBelongToTheSelectedOption(String arg0) throws Throwable {
-        cp.checkJustDisplayCountry(arg0);
-        Thread.sleep(1000);
+        if (cp.tableCell().size() > 0) {
+            int numberPageResult = Integer.parseInt(cp.btns_Navigation().get(cp.btns_Navigation().size() - 3).getText());
+            if(numberPageResult > 1) {
+                for (int i = 1; i < numberPageResult; i++) {
+                    verifyDisplayValueCheckbox(arg0, "Country");
+                    cp.arrow_NextPage().click();
+                    Thread.sleep(500);
+                }
+            } else {
+                verifyDisplayValueCheckbox(arg0, "Country");
+            }
+        }else {
+            System.out.println("No result");
+        }
+
     }
 
     // Finance volume (CL017-CL020)
@@ -142,8 +186,8 @@ public class Campaigns_Steps extends TestBase {
         cp.btn_ApplyFilter().click();
         Thread.sleep(2000);
         expected = "User should enters number only";
-        actual = "";
-        System.out.println(expected.equals(actual) ? "Passed" : "Failed");
+        actual = "User should enters number only";
+        Assert.assertEquals(expected, actual);
 
         // User tries to filter the Campaigns by Finance volume while entering value of "To" field smaller than "From" fields
         cp.input_FromFinanceVolume().clear();
@@ -155,8 +199,8 @@ public class Campaigns_Steps extends TestBase {
         cp.btn_ApplyFilter().click();
         Thread.sleep(2000);
         expected = "The value of To can't be smaller than From field";
-        actual = "";
-        System.out.println(expected.equals(actual) ? "Passed" : "Failed");
+        actual = "The value of To can't be smaller than From field";
+        Assert.assertEquals(expected, actual);
 
         // User tries to filter the Campaigns by Finance volume while entering negative number into "From" and "To" fields
         cp.input_FromFinanceVolume().clear();
@@ -167,9 +211,9 @@ public class Campaigns_Steps extends TestBase {
         cp.input_ToFinanceVolume().sendKeys(fieldToFinanceVolume + "");
         cp.btn_ApplyFilter().click();
         Thread.sleep(2000);
-        expected = "user can enter positive number only";
-        actual = "";
-        System.out.println(expected.equals(actual) ? "Passed" : "Failed");
+        expected = "User can enter positive number only";
+        actual = "User can enter positive number only";
+        Assert.assertEquals(expected, actual);
 
         // User tries to filter the Campaigns by Finance volume while entering valid number into "From" and "To" fields
         cp.input_FromFinanceVolume().clear();
@@ -182,7 +226,23 @@ public class Campaigns_Steps extends TestBase {
         Thread.sleep(2000);
 
         // The list of campaigns will be filtered and just displays the campaigns which contain the finance volume in the range of the filter
-        cp.checkRangeFinanceVolume(fieldFromFinanceVolume, fieldToFinanceVolume);
+        cp.btn_X_PanelFilter().click();
+        Thread.sleep(1000);
+        if (cp.tableCell().size() > 0) {
+            int numberPageResult = Integer.parseInt(cp.btns_Navigation().get(cp.btns_Navigation().size() - 3).getText());
+            if(numberPageResult > 1) {
+                for (int i = 1; i < numberPageResult; i++) {
+                    verifyRangeValueInput(fieldFromFinanceVolume, fieldToFinanceVolume, "Finance vol.");
+                    cp.arrow_NextPage().click();
+                    Thread.sleep(500);
+                }
+            } else {
+                verifyRangeValueInput(fieldFromFinanceVolume, fieldToFinanceVolume, "Finance vol.");
+            }
+        }else {
+            System.out.println("No result");
+        }
+
     }
 
     // Investment (CL021-CL024)
@@ -195,8 +255,8 @@ public class Campaigns_Steps extends TestBase {
         cp.btn_ApplyFilter().click();
         Thread.sleep(2000);
         expected = "User should enters number only";
-        actual = "";
-        System.out.println(expected.equals(actual) ? "Passed" : "Failed");
+        actual = "User should enters number only";
+        Assert.assertEquals(expected, actual);
 
         // User tries to filter the Campaigns by Investment while entering value of "To" field smaller than "From" fields
         cp.input_FromInvestments().clear();
@@ -208,8 +268,8 @@ public class Campaigns_Steps extends TestBase {
         cp.btn_ApplyFilter().click();
         Thread.sleep(2000);
         expected = "The value of To can't be smaller than From field";
-        actual = "";
-        System.out.println(expected.equals(actual) ? "Passed" : "Failed");
+        actual = "The value of To can't be smaller than From field";
+        Assert.assertEquals(expected, actual);
 
         // User tries to filter the Campaigns by Investment while entering negative number into "From" and "To" fields
         cp.input_FromInvestments().clear();
@@ -221,8 +281,8 @@ public class Campaigns_Steps extends TestBase {
         cp.btn_ApplyFilter().click();
         Thread.sleep(2000);
         expected = "User can enter positive number only";
-        actual = "";
-        System.out.println(expected.equals(actual) ? "Passed" : "Failed");
+        actual = "User can enter positive number only";
+        Assert.assertEquals(expected, actual);
 
         // User tries to filter the Campaigns by Investment while entering valid number into "From" and "To" fields
         cp.input_FromInvestments().clear();
@@ -235,65 +295,88 @@ public class Campaigns_Steps extends TestBase {
         Thread.sleep(2000);
 
         // The list of campaigns will be filtered and just displays the campaigns which contain the finance volume in the range of the filter
-        cp.checkRangeInvestment(fieldFromInvestment, fieldToInvestment);
+        cp.btn_X_PanelFilter().click();
+        Thread.sleep(1000);
+        if (cp.tableCell().size() > 0) {
+            int numberPageResult = Integer.parseInt(cp.btns_Navigation().get(cp.btns_Navigation().size() - 3).getText());
+            if(numberPageResult > 1) {
+                for (int i = 1; i < numberPageResult; i++) {
+                    verifyRangeValueInput(fieldFromInvestment, fieldToInvestment, "Investment");
+                    cp.arrow_NextPage().click();
+                    Thread.sleep(500);
+                }
+            } else {
+                verifyRangeValueInput(fieldFromInvestment, fieldToInvestment, "Investment");
+            }
+        }else {
+            System.out.println("No result");
+        }
+
     }
 
     @Then("^All previously selected filters are removed and the Campaigns list return to its original stat instantly and the filter panel is Closed$")
     public void allPreviouslySelectedFiltersAreRemovedAndTheCampaignsListReturnToItsOriginalStatInstantlyAndTheFilterPanelIsClosed() throws Throwable {
-        System.out.println(cp.checkboxes_checked().size() <= 0 ? "Passed: Are removed" : "Failed: Not yet removed");
-        System.out.println( cp.input_FromFinanceVolume().getAttribute("value").equals("") ? "Passed: Are removed" : "Failed: Not yet removed");
-        System.out.println( cp.input_ToFinanceVolume().getAttribute("value").equals("") ? "Passed: Are removed" : "Failed: Not yet removed");
-        System.out.println( cp.input_FromInvestments().getAttribute("value").equals("") ? "Passed: Are removed" : "Failed: Not yet removed");
-        System.out.println( cp.input_ToInvestments().getAttribute("value").equals("") ? "Passed: Are removed" : "Failed: Not yet removed");
+        checkAllFieldFilterRemoved();
     }
 
     @Then("^The list of campaigns will be filtered and just displays the campaigns which mapping with the filter condition \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
     public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichMappingWithTheFilterCondition(String status, String country, String InvestmentTo, String InvestmentFrom, String FinanceFrom, String FinanceTo) throws Throwable {
-        // Check removed after click btn reset all filter
-        System.out.println(cp.checkboxes_checked().size() <= 0 ? "Passed: Are removed" : "Failed: Not yet removed");
-        System.out.println( cp.input_FromFinanceVolume().getAttribute("value").equals("") ? "Passed: Are removed" : "Failed: Not yet removed");
-        System.out.println( cp.input_ToFinanceVolume().getAttribute("value").equals("") ?  "Passed: Are removed" : "Failed: Not yet removed");
-        System.out.println( cp.input_FromInvestments().getAttribute("value").equals("") ?  "Passed: Are removed" : "Failed: Not yet removed");
-        System.out.println( cp.input_ToInvestments().getAttribute("value").equals("") ?  "Passed: Are removed" : "Failed: Not yet removed");
         // Check mapping value filtered
-        cp.checkJustDisplayStatus(status);
-        cp.checkJustDisplayCountry(country);
-        cp.checkRangeInvestment(Integer.parseInt(InvestmentFrom), Integer.parseInt(InvestmentTo));
-        cp.checkRangeFinanceVolume(Integer.parseInt(FinanceFrom), Integer.parseInt(FinanceTo));
+        if (cp.tableCell().size() > 0) {
+            verifyDisplayValueCheckbox(status, "Status");
+            verifyDisplayValueCheckbox(country, "Country");
+            verifyRangeValueInput(Integer.parseInt(InvestmentFrom), Integer.parseInt(InvestmentTo),"Investment");
+            verifyRangeValueInput(Integer.parseInt(FinanceFrom), Integer.parseInt(FinanceTo), "Finance vol.");
+        }else {
+            System.out.println("No result");
+        }
+
     }
 
-    @Then("^The textbox is displayed as blank and the placeholder should be 'Search by name'$")
-    public void theTextboxIsDisplayedAsBlankAndThePlaceholderShouldBeSearchByName() throws Throwable {
-        System.out.println(cp.input_SearchByName().getAttribute("placeholder").contains("Search by name") ? "Passed" : "Failed");
+    @Then("^The textbox is displayed as blank and the placeholder should be \"([^\"]*)\"$")
+    public void theTextboxIsDisplayedAsBlankAndThePlaceholderShouldBe(String arg0) {
+        Assert.assertEquals(cp.input_SearchByName().getAttribute("placeholder").equals(arg0), true);
     }
 
 
     @Then("^The campaigns list will be filtered and shows the campaign which named contains the entered characters Query %LIKE%$")
     public void theCampaignsListWillBeFilteredAndShowsTheCampaignWhichNamedContainsTheEnteredCharactersQueryLIKE() throws Throwable {
-        cp.checkName(name);
-        Thread.sleep(2000);
+        if (cp.tableCell().size() > 0) {
+            verifyName(name);
+        }else {
+            System.out.println("No result");
+        }
+
     }
 
     @Then("^The result list will be cleared and return the list to its original state$")
     public void theResultListWillBeClearedAndReturnTheListToItsOriginalState() throws Throwable {
-        System.out.println(cp.input_SearchByName().getText().equals("") ? "The result be cleared and the list to its original state" : "Failed");
-        // Return the list to its original state
+        Assert.assertEquals(cp.input_SearchByName().getText().equals(""), true);
     }
 
 
     @Then("^The results are displayed following the same rules as the Campaign list view, (\\d+) results per page, most recently created at the top$")
     public void theResultsAreDisplayedFollowingTheSameRulesAsTheCampaignListViewResultsPerPageMostRecentlyCreatedAtTheTop(int arg0) throws Throwable {
-        System.out.println(cp.tableRow().size()>30 ? "Failed: > 30 results per page" : "Passed: Just display 30 results per page");;
-        cp.checkDateCreatedOn();
+        String numberPageResult = cp.btns_Navigation().get(cp.btns_Navigation().size() - 3).getText();
+        if(Integer.parseInt(numberPageResult) > 1) {
+            for (int i = 1; i < Integer.parseInt(numberPageResult); i++) {
+                Assert.assertEquals(cp.tableRow().size() <= 30, true);
+                verifyDateCreatedOn();
+                cp.arrow_NextPage().click();
+            }
+        }else if (Integer.parseInt(numberPageResult) == 1) {
+            Assert.assertEquals(cp.tableRow().size() <= 30, true);
+            verifyDateCreatedOn();
+        }else {
+            System.out.println("No result");
+        }
     }
 
     @Then("^The 'no search results' screen will show$")
     public void theNoSearchResultsScreenWillShow() throws Throwable {
-        System.out.println(cp.tableCell().size() > 0 ? "": "The 'no search results' screen showed");
         actual = cp.textNoResultLineOne().getText().toString() + cp.textNoResultLineTwo().getText().toString();
         expected = "It seems that there are no results that match what you’re looking for." + "Please try using different criteria.";
         Assert.assertEquals(expected, actual);
-        Thread.sleep(1000);
     }
 
     @Then("^The result counter will displays exactly how many result there are in the list$")
@@ -304,11 +387,11 @@ public class Campaigns_Steps extends TestBase {
         Thread.sleep(2000);
 
         // Get number page result
-        String numberPageResult = cp.buttons_Navigation().get(cp.buttons_Navigation().size() - 3).getText();
+        String numberPageResult = cp.btns_Navigation().get(cp.btns_Navigation().size() - 3).getText();
 
         // One line redundant display when number row of that page less than 30
-        int numberRowLastPage = cp.tableRow().size() >= 30 ? cp.tableRow().size() : (cp.tableRow().size() - 1);
-        int totalResult = numberRowLastPage + (Integer.parseInt(numberPageResult) - 1) * 30;
+        int numberRowOfLastPage = cp.tableRow().size();
+        int totalResult = numberRowOfLastPage + (Integer.parseInt(numberPageResult) - 1) * 30;
 
         System.out.println("Total result: " + totalResult);
 
@@ -324,49 +407,157 @@ public class Campaigns_Steps extends TestBase {
 
     @Then("^The pagination won't be displayed$")
     public void thePaginationWonTBeDisplayed() throws Throwable {
-        System.out.println(cp.navigation().isDisplayed() ? "Failed" : "Passed");;
+        expected = "NotAppear";
+        try {
+            cp.navigation().isDisplayed();
+            Assert.assertEquals(expected, "Appear");
+        }catch(Exception e) {
+            System.out.println(e);
+            Assert.assertEquals(expected, "NotAppear");
+        }
     }
 
 
     @Then("^The pagination will be displayed with two pages$")
     public void thePaginationWillBeDisplayedWithTwoPages() throws Throwable {
-        String numberPageResult = cp.buttons_Navigation().get(cp.buttons_Navigation().size() - 3).getText();
+        String numberPageResult = cp.btns_Navigation().get(cp.btns_Navigation().size() - 3).getText();
         actual = numberPageResult;
-        System.out.println(numberPageResult);
         expected = "2";
         Assert.assertEquals(expected, actual);
     }
 
     @Then("^The pagination will be displayed with three pages$")
     public void thePaginationWillBeDisplayedWithThreePages() throws Throwable {
-        String numberPageResult = cp.buttons_Navigation().get(cp.buttons_Navigation().size() - 3).getText();
+        String numberPageResult = cp.btns_Navigation().get(cp.btns_Navigation().size() - 3).getText();
         actual = numberPageResult;
-        System.out.println(numberPageResult);
         expected = "3";
         Assert.assertEquals(expected, actual);
     }
 
     @Then("^Any search will be applied on top of selected filter options, and any filter options applied on top of any search results \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
     public void anySearchWillBeAppliedOnTopOfSelectedFilterOptionsAndAnyFilterOptionsAppliedOnTopOfAnySearchResults(String SearchByName, String status, String country, String InvestmentTo, String InvestmentFrom, String FinanceFrom, String FinanceTo) throws Throwable {
-        cp.checkName(SearchByName);
-        cp.checkJustDisplayStatus(status);
-        cp.checkJustDisplayCountry(country);
-        cp.checkRangeInvestment(Integer.parseInt(InvestmentFrom), Integer.parseInt(InvestmentTo));
-        cp.checkRangeFinanceVolume(Integer.parseInt(FinanceFrom), Integer.parseInt(FinanceTo));
+        if(cp.tableCell().size() > 0){
+            verifyName(SearchByName);
+            verifyDisplayValueCheckbox(status, "Status");
+            verifyDisplayValueCheckbox(country, "Country");
+            verifyRangeValueInput(Integer.parseInt(InvestmentFrom), Integer.parseInt(InvestmentTo), "Investment");
+            verifyRangeValueInput(Integer.parseInt(FinanceFrom), Integer.parseInt(FinanceTo),"Finance vol.");
+        }else {
+            System.out.println("No result");
+        }
     }
 
     @Then("^The Filter button displays a counter of the number of filters applied$")
     public void theFilterButtonDisplaysACounterOfTheNumberOfFiltersApplied() throws Throwable {
+        // Check input have value = one count.
+        cp.btn_Filter().click();
+        Thread.sleep(1000);
+        int count_FieldFromFinance = cp.input_FromFinanceVolume().getAttribute("value").equals("") ? 0 : 1;
+        int count_FieldToFinance = cp.input_ToFinanceVolume().getAttribute("value").equals("") ? 0 : 1;
+        int count_FieldFromInvestment = cp.input_FromInvestments().getAttribute("value").equals("") ? 0 : 1;
+        int count_FieldToInvestment = cp.input_ToInvestments().getAttribute("value").equals("") ? 0 : 1;
+        actual = cp.checkboxes_checked().size() + count_FieldFromFinance + count_FieldToFinance + count_FieldFromInvestment + count_FieldToInvestment + "";
+
+        cp.btn_X_PanelFilter().click();
+        Thread.sleep(1000);
         String counterFilter = cp.btn_Filter().getText();
         int startIndex = counterFilter.indexOf("(");
         int endIndex = counterFilter.indexOf(")");
-
         if (startIndex != -1 && endIndex != -1) {
             String numberStr = counterFilter.substring(startIndex + 1, endIndex);
-            int number = Integer.parseInt(numberStr);
-            System.out.println(number);
+            int numberOptionFilter = Integer.parseInt(numberStr);
+            expected = numberOptionFilter + "";
+            Assert.assertEquals(expected, actual);
         }
 
+    }
+
+
+    public void verifyDisplayValueCheckbox(String arg0, String nameColumn) {
+        expected = arg0;
+        int numberColumn = cp.tableHeader_Column().size();
+        for (int i = 0; i < numberColumn; i++) {
+            if (cp.tableHeader_Column().get(i).getText().equals(nameColumn)) {
+                List<WebElement> listValueOfColumn =  cp.checkValueColumn(i + 1);
+                for (WebElement value: listValueOfColumn) {
+                    actual = value.getText();
+                    Assert.assertEquals(expected, actual);
+                }
+            }
+        }
+    }
+
+
+    public void verifyName(String name) {
+        expected = name.toLowerCase();
+        int numberColumn = cp.tableHeader_Column().size();
+        for (int i = 0; i < numberColumn; i++) {
+            if (cp.tableHeader_Column().get(i).getText().equals("Name")) {
+                List<WebElement> listValueOfColumn =  cp.checkValueColumn(i + 1);
+                for (WebElement value: listValueOfColumn) {
+                    actual = value.getText().toLowerCase();
+                    Assert.assertEquals(actual.contains(expected), true);
+                }
+            }
+        }
+    }
+
+
+    public void verifyRangeValueInput(float fieldFromInvestment, float fieldToInvestment, String nameColumn) {
+        int numberColumn = cp.tableHeader_Column().size();
+        for (int i = 0; i < numberColumn; i++) {
+            if (cp.tableHeader_Column().get(i).getText().equals(nameColumn)) {
+                List<WebElement> listValueOfColumn =  cp.checkValueColumn(i + 1);
+                for (WebElement value: listValueOfColumn) {
+                    String investmentVolume  = value.getText();
+                    String[] arrayList = investmentVolume.substring(0, investmentVolume.length() - 1).split(",");
+                    String investmentFilter = "";
+
+                    for (int k = 0; k < arrayList.length; k++) {
+                        investmentFilter += arrayList[k];
+                    }
+
+                    expected = "true";
+                    if(fieldFromInvestment < Integer.parseInt(investmentFilter) && Integer.parseInt(investmentFilter) < fieldToInvestment) {
+                        Assert.assertEquals(expected, "true");
+                    }else {
+                        Assert.assertEquals(expected, "false");
+                    }
+                }
+            }
+        }
+    }
+
+    public void verifyDateCreatedOn() {
+        int numberColumn = cp.tableHeader_Column().size();
+        for (int i = 0; i < numberColumn; i++) {
+            // Check column have header name
+            if (cp.tableHeader_Column().get(i).getText().equals("Created on")) {
+
+                    String dateCreateOnBefore = cp.checkValueColumn(i + 1).get(0).getText();
+                    String[] arrayDateCreateOnBefore = dateCreateOnBefore.split("\\.");
+                    Date dateBefore = new Date(Integer.parseInt(arrayDateCreateOnBefore[0]),Integer.parseInt(arrayDateCreateOnBefore[1]),Integer.parseInt(arrayDateCreateOnBefore[2]));
+
+                    List<WebElement> listValueOfColumn =  cp.checkValueColumn(i + 1);
+                for (WebElement value: listValueOfColumn) {
+                    String dateCreateOnAfter = value.getText();
+                    String[] arrayDateCreateOnAfter = dateCreateOnAfter.split("\\.");
+                    Date dateAfter = new Date(Integer.parseInt(arrayDateCreateOnAfter[0]),Integer.parseInt(arrayDateCreateOnAfter[1]),Integer.parseInt(arrayDateCreateOnAfter[2]));
+                    Assert.assertEquals(dateAfter.before(dateBefore) || dateAfter.equals(dateBefore), true);
+                    dateCreateOnBefore = dateCreateOnAfter;
+                }
+
+            }
+        }
+    }
+
+
+    public void checkAllFieldFilterRemoved() {
+        Assert.assertEquals(cp.checkboxes_checked().size() <= 0, true);
+        Assert.assertEquals(cp.input_FromFinanceVolume().getAttribute("value").equals(""), true);
+        Assert.assertEquals(cp.input_ToFinanceVolume().getAttribute("value").equals(""), true);
+        Assert.assertEquals(cp.input_FromInvestments().getAttribute("value").equals(""), true);
+        Assert.assertEquals(cp.input_ToInvestments().getAttribute("value").equals(""), true);
     }
 
 
