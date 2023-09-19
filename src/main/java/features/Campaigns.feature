@@ -1,117 +1,38 @@
 Feature: User action on the list of campaigns
-#  Scenario Outline: CL006 User clicks the arrow button to collapse the filter
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user selects "<Checkbox>"
-#    And Clicks on the X button
-#    Then The filter panel will be hidden and the filter options won't be cleared
-#
-#  Examples:
-#    |Checkbox|
-#    |Ready to launch|
+  Scenario Outline: CL006 User clicks the arrow button to collapse the filter
+    Given User Logged in as Admin
+    When User goes to the Campaign List View
+    And Clicks on the dropdown filter button
+    And At the filter, user selects "<Checkbox>"
+    And Clicks on the X button
+    Then The filter panel will be hidden and the filter options won't be cleared
 
-#  Scenario Outline: (CL007) User tries to filter the Campaigns by Status "Ready to launch"
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user selects "<Checkbox>"
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
-#
-#  Examples:
-#  |Checkbox|
-#  |Ready to launch|
-#
-#  Scenario Outline: (CL008) User tries to filter the Campaigns by Status "Draft"
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user selects "<Checkbox>"
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
-#
-#    Examples:
-#      |Checkbox|
-#      |Draft|
-#
-#  Scenario Outline: (CL009) User tries to filter the Campaigns by Status "Active"
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user selects "<Checkbox>"
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
-#
-#    Examples:
-#      |Checkbox|
-#      |Active|
+  Examples:
+    |Checkbox|
+    |Ready to launch|
 
-#  Scenario Outline: (CL010) User tries to filter the Campaigns by Status "Closed"
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user selects "<Checkbox>"
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
-#
-#    Examples:
-#      |Checkbox|
-#      |Closed|
+  Scenario Outline: (CL007) User tries to filter the Campaigns by Status "Ready to launch"
+    Given User Logged in as Admin
+    When User goes to the Campaign List View
+    And Clicks on the dropdown filter button
+    And At the filter, user selects "<Checkbox>"
+    And Clicks on 'Apply filter' button
+    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
 
-#  Scenario Outline: (CL011) User tries to filter the Campaigns by Status "Fully funded"
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user selects "<Checkbox>"
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
-#
-#    Examples:
-#      |Checkbox|
-#      |Fully funded|
-#
-#  Scenario Outline: (CL012) User tries to filter the Campaigns by Status "Part funded"
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user selects "<Checkbox>"
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
-#
-#    Examples:
-#      |Checkbox|
-#      |Part funded|
-#
-#  Scenario Outline: (CL013) User tries to filter the Campaigns by Status "Not funded"
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user selects "<Checkbox>"
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
-#
-#    Examples:
-#      |Checkbox|
-#      |Not funded|
-#
-#
-#  Scenario Outline: (CL015) User tries to filter the Campaigns by one Country
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user selects "<Checkbox>"
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which belong to the selected "<Checkbox>" option
-#
-#  Examples:
-#  |Checkbox|
-#  |Chile|
+  Examples:
+  |Checkbox|
+  |Ready to launch|
+  |Draft|
+  |Active|
+  |Closed|
+  |Fully funded|
+  |Part funded|
+  |Not funded|
+  |Chile|
 #
 #
 ##    #Finance
 #
-
 #  Scenario Outline: (CL017) User tries to filter the Campaigns by Finance volume while entering characters into "From" and "To" fields
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View
@@ -122,7 +43,7 @@ Feature: User action on the list of campaigns
 #    Examples:
 #      | From | To |
 #      |abc   |xyz |
-
+#
 #  Scenario Outline: (CL018) User tries to filter the Campaigns by Finance volume while entering value of "To" field smaller than "From" fields
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View
@@ -133,8 +54,8 @@ Feature: User action on the list of campaigns
 #    Then The error message will be displayed as the value of 'To' can't be smaller than 'From' field
 #    Examples:
 #      | To |From|
-#      | 100|10  |
-
+#      | 10|100  |
+#
 #  Scenario Outline: (CL019) User tries to filter the Campaigns by Finance volume while entering negative number into "From" and "To" fields
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View
@@ -159,12 +80,12 @@ Feature: User action on the list of campaigns
 #    Examples:
 #      | To | From |
 #      |50  |100   |
-
-
-
-
-  # Invesment
-
+#
+#
+#
+#
+##   Invesment
+#
 #  Scenario Outline: (CL021) User tries to filter the Campaigns by Investment while entering characters into "From" and "To" fields
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View

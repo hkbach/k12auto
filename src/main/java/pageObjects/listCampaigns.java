@@ -7,18 +7,19 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class listCampaigns {
+
     public static WebDriver driver;
 
     private static WebElement element;
 
-    private static List<WebElement> webElementList;
+    public static List<WebElement> webElementList;
 
     public listCampaigns(WebDriver driver) {
         this.driver = driver;
     }
 
-    public static WebElement title() {
-        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[1]/div[1]/span"));
+    public static WebElement filter() {
+        element = driver.findElement(By.xpath("//body/div[3]/div[3]"));
         return element;
     }
 
@@ -72,6 +73,11 @@ public class listCampaigns {
         return element;
     }
 
+
+    public static WebElement btn_nextPage() {
+        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav/ul/li[5]"));
+        return element;
+    }
     public static WebElement txt_from() {
         element = driver.findElement(By.xpath("//*[@id=\"Finance volume\"]/div/div/div[1]/fieldset/input"));
         return element;
@@ -96,4 +102,17 @@ public class listCampaigns {
         element = driver.findElement(By.xpath(""));
         return element;
     }
+//    public static WebElement btn_page_num(int i) {
+//        element = driver.findElement(By.xpath("//ul[@id='paginationKQTT']/li[@jp-data='"+i+"']")); //biến i đã được khai báo bann đầu
+//        return  element;
+//    }
+    public static WebElement btn_lastPage () {
+        List<WebElement> paging = driver.findElements(By.xpath("//ul[@class='MuiPagination-ul css-nhb8h9']/li"));
+        int lastPageLocation = paging.size() - 3;
+
+        element = driver.findElement(By.xpath("//body/div[@id='root']/div[1]/main[1]/div[1]/div[2]/div[2]/div[1]/nav[1]/ul[1]/li["+lastPageLocation+"]")); //biến lastPageLocation đã được khai báo bann đầu
+        return  element;
+    }
+
+
 }
