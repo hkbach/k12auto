@@ -19,7 +19,7 @@ public class ListCampaigns_Steps extends TestBase {
     String actual = "";
     String expected = "";
     String name = "";
-    String checkbox="";
+    //String checkbox="";
 
     public ListCampaigns_Steps() {
     }
@@ -45,7 +45,7 @@ public class ListCampaigns_Steps extends TestBase {
 
 
     @And("^At the filter, user selects \"([^\"]*)\"$")
-    public void atTheFilterUserSelects()  {
+    public void atTheFilterUserSelects(String checkbox)  {
         // Write code here that turns the phrase above into concrete actions
         if (checkbox.equals("Ready to launch") ){
             cp.checkbox_ReadyToLaunch().click();
@@ -93,7 +93,7 @@ public class ListCampaigns_Steps extends TestBase {
     }
 
     @Then("^The list of campaigns will be filtered and just displays the campaigns which on \"([^\"]*)\" status$")
-    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichOnStatus(String arg0 )  throws Throwable {
+    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichOnStatus(String checkbox)  throws Throwable {
         int totalPage  = Integer.parseInt(cp.btn_lastPage().getText());// xác định số trang, chuyểnn số trang sang chữ số
 
             // tạo vòng lặp đếm số trang
@@ -111,7 +111,7 @@ public class ListCampaigns_Steps extends TestBase {
                     //row_per_page.size() đếm xem có bn row trong page
                     //row<row_per_page.size vì row đếm từ 0
 
-                    String expected_status = arg0;
+                    String expected_status = checkbox;
                     //lấy giá trị được truyền đã có ở campaigns.feature
 
                     WebElement elementCheck = driver.findElement(By.xpath("//tbody/tr[" + row + "]/th[1]"));//th[1] colum 1
@@ -178,7 +178,6 @@ public class ListCampaigns_Steps extends TestBase {
         cp.txt_fromI().sendKeys(arg0);
         cp.txt_toI().sendKeys(arg1) ;
     }
-
     @Then("^At Investment field the error message will be displayed as user should enters number only$")
     public void atInvestmentFieldTheErrorMessageWillBeDisplayedAsUserShouldEntersNumberOnly() {
     }

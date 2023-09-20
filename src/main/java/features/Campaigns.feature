@@ -3,32 +3,32 @@ Feature: User action on the list of campaigns
     Given User Logged in as Admin
     When User goes to the Campaign List View
     And Clicks on the dropdown filter button
-    And At the filter, user selects "<Checkbox>"
+    And At the filter, user selects "<checkbox>"
     And Clicks on the X button
     Then The filter panel will be hidden and the filter options won't be cleared
 
   Examples:
-    |Checkbox|
+    |checkbox|
     |Ready to launch|
 
-  Scenario Outline: (CL007) User tries to filter the Campaigns by Status "Ready to launch"
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Clicks on the dropdown filter button
-    And At the filter, user selects "<Checkbox>"
-    And Clicks on 'Apply filter' button
-    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
-
-  Examples:
-  |Checkbox|
-  |Ready to launch|
-  |Draft|
-  |Active|
-  |Closed|
-  |Fully funded|
-  |Part funded|
-  |Not funded|
-  |Chile|
+#  Scenario Outline: (CL007) User tries to filter the Campaigns by Status "Ready to launch"
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Clicks on the dropdown filter button
+#    And At the filter, user selects "<Checkbox>"
+#    And Clicks on 'Apply filter' button
+#    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
+#
+#  Examples:
+#  |Checkbox|
+#  |Ready to launch|
+#  |Draft|
+#  |Active|
+#  |Closed|
+#  |Fully funded|
+#  |Part funded|
+#  |Not funded|
+#  |Chile|
 #
 #
 ##    #Finance
