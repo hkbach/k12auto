@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.Collections;
 import java.util.List;
 
 public class listCampaigns {
@@ -19,12 +20,12 @@ public class listCampaigns {
     }
 
     public static WebElement filter() {
-        element = driver.findElement(By.xpath("//body/div[3]/div[3]"));
+        element = driver.findElement(By.xpath("/html/body/div[2]/div[3]"));
         return element;
     }
 
     public static WebElement checkbox_ReadyToLaunch() {
-        element = driver.findElement(By.xpath("//*[@id=\"Status\"]/div/div[2]/div[2]/span/input"));
+        element = driver.findElement(By.xpath("//input[@value='Ready to launch']"));
         return element;
     }
 
@@ -59,12 +60,12 @@ public class listCampaigns {
     }
 
     public static WebElement btn_X() {
-        element = driver.findElement(By.xpath("/html/body/div[3]/div[3]/div/div[1]/button"));
+        element = driver.findElement(By.xpath("//button[@aria-label='close']"));
         return element;
     }
 
     public static WebElement btn_applyFilters() {
-        element = driver.findElement(By.xpath("/html/body/div[3]/div[3]/div/div[2]/button[2]"));
+        element = driver.findElement(By.xpath("//button[@class='Button__StyledButton-sc-17thig6-0 emDWiY']"));
         return element;
     }
 
@@ -97,6 +98,15 @@ public class listCampaigns {
         element = driver.findElement(By.xpath("//*[@id=\"Investments\"]/div/div/div[2]/fieldset/input"));
         return element;
     }
+    public static List<WebElement> checkBox_checked() {
+        List<WebElement> checkBox_check = Collections.singletonList(driver.findElement(By.xpath("//input[@type='checkbox']")));
+        return checkBox_check;
+    }
+
+    public static List<WebElement> lbl_checkbox() {
+        List<WebElement> checkBox_check = Collections.singletonList(driver.findElement(By.xpath("//div[@class='MuiBox-root css-10egq61']")));
+        return checkBox_check;
+    }
 
     public static WebElement error_numberOnly() {
         element = driver.findElement(By.xpath(""));
@@ -106,13 +116,19 @@ public class listCampaigns {
 //        element = driver.findElement(By.xpath("//ul[@id='paginationKQTT']/li[@jp-data='"+i+"']")); //biến i đã được khai báo bann đầu
 //        return  element;
 //    }
+
     public static WebElement btn_lastPage () {
-        List<WebElement> paging = driver.findElements(By.xpath("//ul[@class='MuiPagination-ul css-nhb8h9']/li"));
+        List<WebElement> paging = driver.findElements(By.xpath("//body/div[@id='root']/div[1]/main[1]/div[1]/div[2]/div[2]/div[1]/nav[1]/ul[1]/li/button[1]"));
         int lastPageLocation = paging.size() - 3;
 
-        element = driver.findElement(By.xpath("//body/div[@id='root']/div[1]/main[1]/div[1]/div[2]/div[2]/div[1]/nav[1]/ul[1]/li["+lastPageLocation+"]")); //biến lastPageLocation đã được khai báo bann đầu
+        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav/ul/li["+lastPageLocation+"]")); //biến lastPageLocation đã được khai báo bann đầu
         return  element;
     }
+    public static WebElement btn_goToLastPage() {
+        element = driver.findElement(By.xpath("//button[@aria-label='Go to last page']"));
+        return element;
+    }
+
 
 
 }

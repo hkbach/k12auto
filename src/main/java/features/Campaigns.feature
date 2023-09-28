@@ -1,17 +1,17 @@
 Feature: User action on the list of campaigns
-  Scenario Outline: CL006 User clicks the arrow button to collapse the filter
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Clicks on the dropdown filter button
-    And At the filter, user selects "<checkbox>"
-    And Clicks on the X button
-    Then The filter panel will be hidden and the filter options won't be cleared
+#  Scenario Outline: CL006 User clicks the arrow button to collapse the filter
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Clicks on the dropdown filter button
+#    And At the filter, user selects "<checkbox>"
+#    And Clicks on the X button
+#    Then The filter panel will be hidden and the "<checkbox>" won't be cleared
+#
+#  Examples:
+#    |checkbox|
+#    |Ready to launch|
 
-  Examples:
-    |checkbox|
-    |Ready to launch|
-
-#  Scenario Outline: (CL007) User tries to filter the Campaigns by Status "Ready to launch"
+#  Scenario Outline: CL007 User tries to filter the Campaigns by Status "Ready to launch"
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View
 #    And Clicks on the dropdown filter button
@@ -32,7 +32,7 @@ Feature: User action on the list of campaigns
 #
 #
 ##    #Finance
-#
+
 #  Scenario Outline: (CL017) User tries to filter the Campaigns by Finance volume while entering characters into "From" and "To" fields
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View
@@ -43,7 +43,7 @@ Feature: User action on the list of campaigns
 #    Examples:
 #      | From | To |
 #      |abc   |xyz |
-#
+
 #  Scenario Outline: (CL018) User tries to filter the Campaigns by Finance volume while entering value of "To" field smaller than "From" fields
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View
@@ -67,7 +67,7 @@ Feature: User action on the list of campaigns
 #    Examples:
 #      | To | From |
 #      |-12 |-100  |
-#
+
 #
 #  Scenario Outline: (CL020) User tries to filter the Campaigns by Finance volume while entering valid number into "From" and "To" fields
 #    Given User Logged in as Admin
@@ -85,7 +85,7 @@ Feature: User action on the list of campaigns
 #
 #
 ##   Invesment
-#
+
 #  Scenario Outline: (CL021) User tries to filter the Campaigns by Investment while entering characters into "From" and "To" fields
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View
@@ -107,26 +107,30 @@ Feature: User action on the list of campaigns
 #    Then The error message will be displayed as the value of "To" can't be smaller than "From" field
 #    Examples:
 #      | To | From |
+#      |10|100|
 #
-#  Scenario: (CL023) User tries to filter the Campaigns by Investment while entering negative number into "From" and "To" fields
+#  Scenario Outline: (CL023) User tries to filter the Campaigns by Investment while entering negative number into "From" and "To" fields
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View
 #    And Clicks on the dropdown filter button
-#    And At the filter, user enters number into the "To" field
-#    And Enters number into the "From" field
+#    And At the filter, user enters number into the "<To>" field
+#    And Enters number into the "<From>" field
 #    And Clicks on 'Apply filter' button
 #    Then The error message will be displayed as user can enter positive number only
-#
-#  Scenario: (CL024) User tries to filter the Campaigns by Investment while entering valid number into "From" and "To" fields
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user enters number into the "To" field
-#    And Enters number into the "From" field
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which contain the Investment in the range of the filter
-#
-#
+#    Examples:
+#      | To | From |
+#      |-10 |-100  |
+
+  Scenario: (CL024) User tries to filter the Campaigns by Investment while entering valid number into "From" and "To" fields
+    Given User Logged in as Admin
+    When User goes to the Campaign List View
+    And Clicks on the dropdown filter button
+    And At the filter, user enters number into the "To" field
+    And Enters number into the "From" field
+    And Clicks on 'Apply filter' button
+    Then The list of campaigns will be filtered and just displays the campaigns which contain the Investment in the range of the filter
+
+
 ##   Reset all filters
 #  Scenario Outline: (CL025) User click on the 'Reset all filters' to clear the applied filter
 #    Given User Logged in as Admin

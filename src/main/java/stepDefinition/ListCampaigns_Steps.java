@@ -1,5 +1,6 @@
 package stepDefinition;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -8,6 +9,7 @@ import org.apache.http.impl.io.SocketOutputBuffer;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.w3c.dom.Text;
 import pageObjects.listCampaigns;
 import utils.libs.TestBase;
 
@@ -66,61 +68,107 @@ public class ListCampaigns_Steps extends TestBase {
     }
 
     @And("^Clicks on the X button$")
-    public void clicksOnTheXButtonAgain() {
-        cp.btn_X().click() ;
-    }
+    public void clicksOnTheXButtonAgain() {cp.btn_X().click() ;}
+    @Then("^The filter panel will be hidden and the \"([^\"]*)\" won't be cleared$")
+    public void theFilterPanelWillBeHiddenAndTheWonTBeCleared(String checkbox ) throws Throwable {
 
-    @Then("^The filter panel will be hidden and the filter options won't be cleared$")
-    public void theFilterPanelWillBeHiddenAndTheFilterOptionsWonTBeCleared() {
-         Boolean actual1,actual2,expected1,expected2;
+        // Check xem panel filter có hiển thị ko?
+        boolean expected1 = false;
+        boolean actual1 = cp.filter().isDisplayed();
+        Assert.assertEquals(expected1, actual1);
 
-         actual1 = cp.checkbox_ReadyToLaunch().isSelected() ; // true
-         actual2 = cp.filter().isDisplayed();
+        //check xem các check box có được select hay không?
+        boolean expected2 = true;
 
-         expected1 = true ;
-         expected2 = true;
-         Assert.assertEquals(expected1,actual1);
-         Assert.assertEquals(expected2,actual2);
+        if (checkbox.equals("Ready to launch") ){
+            boolean actual2 = cp.checkbox_ReadyToLaunch().isSelected() ;
+            Assert.assertEquals(expected2, actual2);
+        } else if (checkbox.equals("Draft")) {
+            boolean actual2 = cp.checkbox_Draft().isSelected();
+            Assert.assertEquals(expected2, actual2);
+        } else if (checkbox.equals("Active")) {
+            boolean actual2 =cp.checkbox_active().isSelected();
+            Assert.assertEquals(expected2, actual2);
+        } else if (checkbox .equals("Closed") ) {
+            boolean actual2 = cp.checkbox_closed().isSelected();
+            Assert.assertEquals(expected2, actual2);
+        } else if (checkbox.equals("Fully funded") ) {
+            boolean actual2 = cp.checkbox_fullyFunded().isSelected();
+            Assert.assertEquals(expected2, actual2);
+        } else if (checkbox.equals("Part funded") ) {
+            boolean actual2 = cp.checkbox_partFunded().isSelected();
+            Assert.assertEquals(expected2, actual2);
+        } else if (checkbox.equals("Not funded") ) {
+            boolean actual2 = cp.checkbox_notFunded().isSelected() ;
+            Assert.assertEquals(expected2, actual2);
+        }
 
-         //k biết làm
+//        cp.btn_filter().click();
+//        Thread.sleep(1000);
+//        //tạo 1 list chứa tất cả các checkbox
+//        List<WebElement> webElementList_checkbox = cp.checkBox_checked();
+//            //chạy vòng lặp để check các checkbox
+//            for (int i = 0; i < webElementList_checkbox.size(); i++) {
+//                //check xem các check box nào cần text
+//                // get text ra tìm xem cái nào là checkbox cần ktra, tạidđó check xem checkbox nào đc selected
+//                webElementList_checkbox.get(i).isSelected();
+//            boolean expected = true;
+//            Assert.assertEquals(expected, actual);
+//        }
     }
 
     @And("^Clicks on 'Apply filter' button$")
     public void clicksOnApplyFilterButton() throws Throwable {
         cp.btn_applyFilters().click() ;
         Thread.sleep(1000);
-
+        cp.btn_X().click();
+        Thread.sleep(1000);
     }
 
     @Then("^The list of campaigns will be filtered and just displays the campaigns which on \"([^\"]*)\" status$")
     public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichOnStatus(String checkbox)  throws Throwable {
-        int totalPage  = Integer.parseInt(cp.btn_lastPage().getText());// xác định số trang, chuyểnn số trang sang chữ số
+        int totalPage = Integer.parseInt(cp.btn_lastPage().getText());// xác định số trang, chuyểnn số trang sang chữ số
+        if (totalPage==1) {
+            List<WebElement> row_per_page = driver.findElements(By.xpath("//tr[@class='MuiTableRow-root css-1gqug66']"));
+            //Tạo list chứa các đối tượng WebElement <tr>
+            Thread.sleep(1000);
 
-            // tạo vòng lặp đếm số trang
-            for(int page=1; page<totalPage; page++) {
-                cp.btn_nextPage().click();
-                //click từng page bằng next button
-
-                List<WebElement> row_per_page = driver.findElements(By.xpath("//tbody[@class='MuiTableBody-root css-1xnox0e']/tr"));
-                //Tạo list chứa các đối tượng WebElement <tr>
-
-                Thread.sleep(1000);
-
-                //Tạo vòng lặp đếm số dòng mỗi trang
-                for (int row = 0; row < row_per_page.size(); row++) {
-                    //row_per_page.size() đếm xem có bn row trong page
-                    //row<row_per_page.size vì row đếm từ 0
-
-                    String expected_status = checkbox;
-                    //lấy giá trị được truyền đã có ở campaigns.feature
-
-                    WebElement elementCheck = driver.findElement(By.xpath("//tbody/tr[" + row + "]/th[1]"));//th[1] colum 1
-                    String actual_status = row_per_page.get(row).getText();
-                    Assert.assertTrue(expected_status == actual_status);
-                    break;
-                }
+            for (int i=1;i <= row_per_page.size();i++ ){
+                WebElement statusCheck = driver.findElement(By.xpath("//tbody/tr["+i+"]/th[1]"));
+                actual = statusCheck.getText();
+                expected = checkbox ;
+                Assert.assertEquals(expected,actual);
             }
-    }
+        }else {
+            int page_temp = totalPage - 1;
+            // số trang trước trang cuối
+
+            for (int j=1; j<page_temp;j++) {
+                for (int i = 1; i <= 30; i++) {
+                    WebElement statusCheck = driver.findElement(By.xpath("//tbody/tr["+i+"]/th[1]"));
+                    actual = statusCheck.getText();
+                    expected = checkbox;
+                    Assert.assertEquals(expected, actual);
+                }
+                cp.btn_nextPage().click();
+            }
+
+            //check tại trang cuối
+            List<WebElement> row_per_page = driver.findElements(By.xpath("//tr[@class='MuiTableRow-root css-1gqug66']"));
+            //Tạo list chứa các đối tượng WebElement <tr>
+            Thread.sleep(1000);
+
+            for (int i=1;i <= row_per_page.size();i++ ){
+                WebElement statusCheck = driver.findElement(By.xpath("//tbody/tr["+i+"]/th[1]"));
+                actual = statusCheck.getText();
+                expected = checkbox ;
+                Assert.assertEquals(expected,actual);
+            }
+        }
+        }
+
+
+
 
     @Then("^The list of campaigns will be filtered and just displays the campaigns which belong to the selected \"([^\"]*)\" option$")
     public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichBelongToTheSelectedOption(String arg0) {
@@ -180,6 +228,25 @@ public class ListCampaigns_Steps extends TestBase {
     }
     @Then("^At Investment field the error message will be displayed as user should enters number only$")
     public void atInvestmentFieldTheErrorMessageWillBeDisplayedAsUserShouldEntersNumberOnly() {
+    }
+
+
+    @And("^At the Investment filter, user enters number into the \"([^\"]*)\" field$")
+    public void atTheInvestmentFilterUserEntersNumberIntoTheField(String arg0) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @And("^Enters number into the \"([^\"]*)\" field at investment$")
+    public void entersNumberIntoTheFieldAtInvestment(String arg0) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @Then("^The error message will be displayed as the value of \"([^\"]*)\" can't be smaller than \"([^\"]*)\" field$")
+    public void theErrorMessageWillBeDisplayedAsTheValueOfCanTBeSmallerThanField(String arg0, String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
     }
 }
 
