@@ -1,17 +1,27 @@
 Feature: User action on the list of campaigns
+#  Scenario Outline: CL006 User clicks the arrow button to collapse the filter
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Clicks on the dropdown filter button
+#    And At the filter, user selects "<checkbox>"
+#    And Clicks on the X button
+#    Then The filter panel will be hidden and the "<checkbox>" won't be cleared
+#
+#  Examples:
+#    |checkbox|
+#    |Ready to launch|
 
-
-  Scenario Outline: CL007 User tries to filter the Campaigns by Status "Ready to launch"
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Clicks on the dropdown filter button
-    And At the filter, user selects "<Checkbox>"
-    And Clicks on 'Apply filter' button
-    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
-
-  Examples:
-  |Checkbox|
-  |Ready to launch|
+#  Scenario Outline: CL007 User tries to filter the Campaigns by Status "Ready to launch"
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Clicks on the dropdown filter button
+#    And At the filter, user selects "<Checkbox>"
+#    And Clicks on 'Apply filter' button
+#    Then The list of campaigns will be filtered and just displays the campaigns which on "<Checkbox>" status
+#
+#  Examples:
+#  |Checkbox|
+#  |Ready to launch|
 #  |Draft|
 #  |Active|
 #  |Closed|
@@ -111,17 +121,20 @@ Feature: User action on the list of campaigns
 #      | To | From |
 #      |-10 |-100  |
 
-#  Scenario: (CL024) User tries to filter the Campaigns by Investment while entering valid number into "From" and "To" fields
-#    Given User Logged in as Admin
-#    When User goes to the Campaign List View
-#    And Clicks on the dropdown filter button
-#    And At the filter, user enters number into the "To" field
-#    And Enters number into the "From" field
-#    And Clicks on 'Apply filter' button
-#    Then The list of campaigns will be filtered and just displays the campaigns which contain the Investment in the range of the filter
+  Scenario Outline: (CL024) User tries to filter the Campaigns by Investment while entering valid number into "From" and "To" fields
+    Given User Logged in as Admin
+    When User goes to the Campaign List View
+    And Clicks on the dropdown filter button
+    And At the filter, user enters number into the "<To>" field
+    And Enters number into the "<From>" field
+    And Clicks on 'Apply filter' button
+    Then The list of campaigns will be filtered and just displays the campaigns which contain the Investment in the range of the filter
+    Examples:
+      | To | From |
+      |100 |50    |
 
 
-##   Reset all filters
+#   Reset all filters
 #  Scenario Outline: (CL025) User click on the 'Reset all filters' to clear the applied filter
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View

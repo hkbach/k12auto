@@ -270,6 +270,11 @@ public class ListCampaigns_Steps extends TestBase {
         // Write code here that turns the phrase above into concrete actions
         throw new PendingException();
     }
+
+    @Then("^The list of campaigns will be filtered and just displays the campaigns which contain the Investment in the range of the filter$")
+    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichContainTheInvestmentInTheRangeOfTheFilter() {
+
+    }
 }
 
 

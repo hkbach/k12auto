@@ -79,6 +79,7 @@ public class listCampaigns {
         element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav/ul/li[5]"));
         return element;
     }
+
     public static WebElement txt_from() {
         element = driver.findElement(By.xpath("//*[@id=\"Finance volume\"]/div/div/div[1]/fieldset/input"));
         return element;
@@ -98,6 +99,7 @@ public class listCampaigns {
         element = driver.findElement(By.xpath("//*[@id=\"Investments\"]/div/div/div[2]/fieldset/input"));
         return element;
     }
+
     public static List<WebElement> checkBox_checked() {
         List<WebElement> checkBox_check = Collections.singletonList(driver.findElement(By.xpath("//input[@type='checkbox']")));
         return checkBox_check;
@@ -117,15 +119,13 @@ public class listCampaigns {
 //        return  element;
 //    }
 
-    public static WebElement btn_lastPage () {
+    public static WebElement btn_lastPage() {
         List<WebElement> paging = driver.findElements(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav/ul/li/button"));
         int lastPageLocation = paging.size() - 3;
         System.out.println(lastPageLocation);
 
-
-
-       element = paging.get(lastPageLocation ); // lấy phần tử trong list
-        return  element;
+        element = paging.get(lastPageLocation); // lấy phần tử trong list
+        return element;
 
     }
 
@@ -135,6 +135,12 @@ public class listCampaigns {
         return element;
     }
 
+    // tạo 1 list chứa các phần từ ở header
+    public static List<WebElement> header() {
+        List<WebElement> header = driver.findElements(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[1]/table/thead/tr/th"));
+        int totalColum = header.size();
+        System.out.println(totalColum);
 
-
+        return header;
+    }
 }
