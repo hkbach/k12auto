@@ -118,12 +118,18 @@ public class listCampaigns {
 //    }
 
     public static WebElement btn_lastPage () {
-        List<WebElement> paging = driver.findElements(By.xpath("//body/div[@id='root']/div[1]/main[1]/div[1]/div[2]/div[2]/div[1]/nav[1]/ul[1]/li/button[1]"));
+        List<WebElement> paging = driver.findElements(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav/ul/li/button"));
         int lastPageLocation = paging.size() - 3;
+        System.out.println(lastPageLocation);
 
-        element = driver.findElement(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav/ul/li["+lastPageLocation+"]")); //biến lastPageLocation đã được khai báo bann đầu
+
+
+       element = paging.get(lastPageLocation ); // lấy phần tử trong list
         return  element;
+
     }
+
+
     public static WebElement btn_goToLastPage() {
         element = driver.findElement(By.xpath("//button[@aria-label='Go to last page']"));
         return element;

@@ -5,6 +5,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.apache.http.impl.io.SessionOutputBufferImpl;
 import org.apache.http.impl.io.SocketOutputBuffer;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -127,7 +128,12 @@ public class ListCampaigns_Steps extends TestBase {
 
     @Then("^The list of campaigns will be filtered and just displays the campaigns which on \"([^\"]*)\" status$")
     public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichOnStatus(String checkbox)  throws Throwable {
-        int totalPage = Integer.parseInt(cp.btn_lastPage().getText());// xác định số trang, chuyểnn số trang sang chữ số
+        System.out.println(cp.btn_lastPage().getText());
+
+
+
+        int totalPage = Integer.parseInt(cp.btn_lastPage().getText());        // xác định số trang, chuyểnn số trang sang chữ số
+
         if (totalPage==1) {
             List<WebElement> row_per_page = driver.findElements(By.xpath("//tr[@class='MuiTableRow-root css-1gqug66']"));
             //Tạo list chứa các đối tượng WebElement <tr>
@@ -143,13 +149,16 @@ public class ListCampaigns_Steps extends TestBase {
             int page_temp = totalPage - 1;
             // số trang trước trang cuối
 
-            for (int j=1; j<page_temp;j++) {
+            for (int j=1; j<page_temp;j++) {     //mình có n page mình click n-1 lần
                 for (int i = 1; i <= 30; i++) {
                     WebElement statusCheck = driver.findElement(By.xpath("//tbody/tr["+i+"]/th[1]"));
                     actual = statusCheck.getText();
+                    System.out.println(actual) ;
                     expected = checkbox;
                     Assert.assertEquals(expected, actual);
+
                 }
+               // if(j==page_temp) return ; //khi return thif sẽ k chy các dòng phía sau return nữa
                 cp.btn_nextPage().click();
             }
 
@@ -166,6 +175,19 @@ public class ListCampaigns_Steps extends TestBase {
             }
         }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
