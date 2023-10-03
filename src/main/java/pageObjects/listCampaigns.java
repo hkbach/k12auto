@@ -19,6 +19,7 @@ public class listCampaigns {
         this.driver = driver;
     }
 
+
     public static WebElement filter() {
         element = driver.findElement(By.xpath("/html/body/div[2]/div[3]"));
         return element;
@@ -68,6 +69,10 @@ public class listCampaigns {
         element = driver.findElement(By.xpath("//button[@class='Button__StyledButton-sc-17thig6-0 emDWiY']"));
         return element;
     }
+    public static WebElement btn_resetFilter() {
+        element = driver.findElement(By.xpath("//button[@fdprocessedid='d7u4i']"));
+        return element;
+    }
 
     public static WebElement btn_filter() {
         element = driver.findElement(By.xpath("//body/div[@id='root']/div[1]/main[1]/div[1]/div[1]/div[2]/button[2]"));
@@ -80,12 +85,12 @@ public class listCampaigns {
         return element;
     }
 
-    public static WebElement txt_from() {
+    public static WebElement txt_fromF() {
         element = driver.findElement(By.xpath("//*[@id=\"Finance volume\"]/div/div/div[1]/fieldset/input"));
         return element;
     }
 
-    public static WebElement txt_to() {
+    public static WebElement txt_toF() {
         element = driver.findElement(By.xpath("//*[@id=\"Finance volume\"]/div/div/div[2]/fieldset/input"));
         return element;
     }
@@ -110,14 +115,15 @@ public class listCampaigns {
         return checkBox_check;
     }
 
-    public static WebElement error_numberOnly() {
+    public static WebElement error_finance() {
         element = driver.findElement(By.xpath(""));
         return element;
     }
-//    public static WebElement btn_page_num(int i) {
-//        element = driver.findElement(By.xpath("//ul[@id='paginationKQTT']/li[@jp-data='"+i+"']")); //biến i đã được khai báo bann đầu
-//        return  element;
-//    }
+    public static WebElement error_investment() {
+        element = driver.findElement(By.xpath(""));
+        return element;
+    }
+
 
     public static WebElement btn_lastPage() {
         List<WebElement> paging = driver.findElements(By.xpath("//*[@id=\"root\"]/div[1]/main/div/div[2]/div[2]/div/nav/ul/li/button"));
