@@ -59,6 +59,20 @@ public class listCampaigns {
         element = driver.findElement(By.xpath("//*[@id=\"Status\"]/div/div[1]/div[2]/span/input"));
         return element;
     }
+    //check box country
+    public static WebElement checkbox_Chile() {element = driver.findElement(By.xpath("//input[@value='Chile']"));return element;}
+    public static WebElement checkbox_CostaRica() {element = driver.findElement(By.xpath("//input[@value='Costa Rica']"));return element;}
+    public static WebElement checkbox_Ghana() {element = driver.findElement(By.xpath("//input[@value='Ghana']"));return element;}
+    public static WebElement checkbox_IvoryCoast() {element = driver.findElement(By.xpath("//input[@value='Ivory Coast']"));return element;}
+    public static WebElement checkbox_Kenya() {element = driver.findElement(By.xpath("//input[@value='Kenya']"));return element;}
+    public static WebElement checkbox_Nigeria() {element = driver.findElement(By.xpath("//input[@value='Nigeria']"));return element;}
+    public static WebElement checkbox_Panama() {element = driver.findElement(By.xpath("//input[@value='Panama']"));return element;}
+    public static WebElement checkbox_Philippines() {element = driver.findElement(By.xpath("//input[@value='Philippines']"));return element;}
+    public static WebElement checkbox_Thailand() {element = driver.findElement(By.xpath("//input[@value='Thailand']"));return element;}
+    public static WebElement checkbox_Uganda() {element = driver.findElement(By.xpath("//input[@value='Uganda']"));return element;}
+    public static WebElement checkbox_Vietnam() {element = driver.findElement(By.xpath("//input[@value='Vietnam']"));return element;}
+
+
 
     public static WebElement btn_X() {
         element = driver.findElement(By.xpath("//button[@aria-label='close']"));
@@ -106,8 +120,8 @@ public class listCampaigns {
     }
 
     public static List<WebElement> checkBox_checked() {
-        List<WebElement> checkBox_check = Collections.singletonList(driver.findElement(By.xpath("//input[@type='checkbox']")));
-        return checkBox_check;
+        List<WebElement> checkBox_checked = Collections.singletonList(driver.findElement(By.xpath("//input[@type='checkbox']")));
+        return checkBox_checked;
     }
 
     public static List<WebElement> lbl_checkbox() {

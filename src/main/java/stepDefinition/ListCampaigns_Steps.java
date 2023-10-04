@@ -141,6 +141,58 @@ public class ListCampaigns_Steps extends TestBase {
         Thread.sleep(1000);
     }
 
+    @And("^At the filter, user selects the filter options want to apply \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+    public void atTheFilterUserSelectsTheFilterOptionsWantToApply(String arg0, String arg1, String arg2, String arg3, String arg4, String arg5) {
+        // Write code here that turns the phrase above into concrete actions
+        if (arg1.equals("Ready to launch")) {
+            cp.checkbox_ReadyToLaunch().click();
+        } else if (arg1.equals("Draft")) {
+            cp.checkbox_Draft().click();
+        } else if (arg1.equals("Active")) {
+            cp.checkbox_active().click();
+        } else if (arg1.equals("Closed")) {
+            cp.checkbox_closed().click();
+        } else if (arg1.equals("Fully funded")) {
+            cp.checkbox_fullyFunded().click();
+        } else if (arg1.equals("Part funded")) {
+            cp.checkbox_partFunded().click();
+        } else if (arg1.equals("Not funded")) {
+            cp.checkbox_notFunded().click();
+        }
+
+        if (arg0.equals("Chile")) {
+            cp.checkbox_Chile().click();
+        } else if (arg0.equals("Costa Rica")) {
+            cp.checkbox_CostaRica().click();
+        } else if (arg0.equals("Ghana")) {
+            cp.checkbox_Ghana().click();
+        } else if (arg0.equals("Ivory Coast")) {
+            cp.checkbox_IvoryCoast().click();
+        } else if (arg0.equals("Kenya")) {
+            cp.checkbox_Kenya().click();
+        } else if (arg0.equals("Nigeria")) {
+            cp.checkbox_Nigeria().click();
+        } else if (arg0.equals("Panama")) {
+            cp.checkbox_Panama().click();
+        } else if (arg0.equals("Philippines")) {
+            cp.checkbox_Philippines().click();
+        } else if (arg0.equals("Thailand")) {
+            cp.checkbox_Thailand().click();
+        } else if (arg0.equals("Uganda")) {
+            cp.checkbox_Uganda().click();
+        } else if (arg0.equals("Vietnam")) {
+            cp.checkbox_Vietnam().click();
+        }
+
+        cp.txt_toI().sendKeys(arg2);
+        cp.txt_fromI().sendKeys(arg3);
+        cp.txt_fromF().sendKeys(arg4);
+        cp.txt_toF().sendKeys(arg5);
+
+
+    }
+
+
     @And("^Clicks on 'Reset all filter' button$")
     public void clicksOnResetAllFilterButton() throws Throwable {
         cp.btn_resetFilter().click();
@@ -270,6 +322,7 @@ public class ListCampaigns_Steps extends TestBase {
 
     @Then("^The list of campaigns will be filtered and just displays the campaigns which contain the finance volume in the range of the filter$")
     public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichContainTheFinanceVolumeInTheRangeOfTheFilter() {
+
     }
 
 
@@ -324,12 +377,38 @@ public class ListCampaigns_Steps extends TestBase {
 
         // Check the filter panel is Closed
         boolean actual = cp.filter().isDisplayed();
-        boolean expected = false ;
-        Assert.assertEquals(expected,actual);
+        boolean expected = false;
+        Assert.assertEquals(expected, actual);
 
     }
 
 
+    @Then("^The Filter button displays a counter of the number of filters applied$")
+    public void theFilterButtonDisplaysACounterOfTheNumberOfFiltersApplied() throws Throwable {
+        String a = cp.btn_filter().getText().toString(); //Filter (4)
+
+        //check xem các textbox có được truyền value gì k? nếu value null thì o, có thì 1
+        int count_FromFinance = cp.txt_fromF().getAttribute("value").equals("") ? 0 : 1;
+        int count_ToFinance = cp.txt_toF().getAttribute("value").equals("") ? 0 : 1;
+        int count_FromInvestment = cp.txt_fromI().getAttribute("value").equals("") ? 0 : 1;
+        int count_ToInvestment = cp.txt_toI().getAttribute("value").equals("") ? 0 : 1;
+        actual = cp.checkBox_checked().size() + count_FromFinance + count_ToFinance + count_FromInvestment + count_ToInvestment + ""; //cộng các biến lại
+
+        cp.btn_X().click();
+        Thread.sleep(2000);
+        String counter = cp.btn_filter().getText().toString(); //Filter (4)
+
+        int startIndex = counter.indexOf("(");
+        int endIndex = counter.indexOf(")");
+        if (startIndex != -1 && endIndex != -1) {
+            String numberStr = counter.substring(startIndex + 1, endIndex);
+            int numberOfFilterApplied = Integer.parseInt(numberStr);
+            expected = numberOfFilterApplied + "";
+            Assert.assertEquals(expected, actual);
+
+
+        }
+    }
 }
 
 
