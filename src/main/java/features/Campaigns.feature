@@ -78,7 +78,7 @@ Feature: User action on the list of campaigns
     Examples:
       | To | From |
       |50  |100   |
-##chưa done
+
 #
 ##   Invesment
 #
