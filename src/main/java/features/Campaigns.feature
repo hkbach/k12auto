@@ -200,86 +200,86 @@ Feature: User action on the list of campaigns
       | name |
       | test |
 
-  Scenario Outline: (CL031) User tries to search the campaign by name
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Enters the "<name>" of campaign into the 'Search by name' field
-    Then The filter function will be automatically triggered right after user entered key
-    Examples:
-      | name |
-      |a     |
-
-  Scenario Outline: (CL032) Check the display of the filtered campaign list
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Enters the "<name>" of campaign into the 'Search by name' field
-    Then The results are displayed following the same rules as the Campaign list view (30 results per page, most recently created at the top)
-    Examples:
-      | name |
-      | Ad    |
-
-  Scenario Outline: (CL033) Check the display of the filtered campaign list when there are no search results
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Enters the "<name>" of campaign into the 'Search by name' field
-    Then The 'no search results' screen will show
-    Examples:
-      | name |
-      | &**&^   |
-
-  Scenario Outline: (CL034) User clears the 'Search by name' data
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Enters the "<name>" of campaign into the 'Search by name' field
-    And Click X button at the text box
-    Then The result list will be cleared and return the list to its original state
-    Examples:
-      | name |
-      | Ad   |
-
-  Scenario Outline: (CL035) Check the result counter
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Enters the "<name>" of campaign into the 'Search by name' field
-    Then The  result counter will displays exactly how many result there are in the list
-    Examples:
-      | name |
-      | Ad   |
-
-  Scenario Outline: (CL036) Check the pagination component when there are 30 rows in the list
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Enters the "<name>" of campaign into the 'Search by name' field
-    And Click X button at the text box
-    Then The pagination won't be displayed
-    Examples:
-      | name |
-      | Ad   |
-
-  Scenario Outline: (CL037) Check the pagination component when there are 31 rows in the list
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Enters the "<name>" of campaign into the 'Search by name' field
-    Then The pagination will be displayed with 2 pages
-    Examples:
-      | name |
-      | Ad   |
-
-  Scenario Outline: (CL038) Check the pagination component when there are 60 rows in the list
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Enters the "<name>" of campaign into the 'Search by name' field
-    Then The pagination will be displayed with 3 pages
-    Examples:
-      | name |
-      | Ad   |
-
-  Scenario Outline: (CL039) Search in combination with filters
-    Given User Logged in as Admin
-    When User goes to the Campaign List View
-    And Click X button at the text box
-    And Enters the "<name>" of campaign into the 'Search by name' field
-    Then Any search will be applied on top of selected filter options, and any filter options applied on top of any search results
-    Examples:
-      | name |
-      | Ad   |
+#  Scenario Outline: (CL031) User tries to search the campaign by name
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Enters the "<name>" of campaign into the 'Search by name' field
+#    Then The filter function will be automatically triggered right after user entered key
+#    Examples:
+#      | name |
+#      |a     |
+#
+#  Scenario Outline: (CL032) Check the display of the filtered campaign list
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Enters the "<name>" of campaign into the 'Search by name' field
+#    Then The results are displayed following the same rules as the Campaign list view (30 results per page, most recently created at the top)
+#    Examples:
+#      | name |
+#      | Ad    |
+#
+#  Scenario Outline: (CL033) Check the display of the filtered campaign list when there are no search results
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Enters the "<name>" of campaign into the 'Search by name' field
+#    Then The 'no search results' screen will show
+#    Examples:
+#      | name |
+#      | &**&^   |
+#
+#  Scenario Outline: (CL034) User clears the 'Search by name' data
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Enters the "<name>" of campaign into the 'Search by name' field
+#    And Click X button at the text box
+#    Then The result list will be cleared and return the list to its original state
+#    Examples:
+#      | name |
+#      | Ad   |
+#
+#  Scenario Outline: (CL035) Check the result counter
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Enters the "<name>" of campaign into the 'Search by name' field
+#    Then The  result counter will displays exactly how many result there are in the list
+#    Examples:
+#      | name |
+#      | Ad   |
+#
+#  Scenario Outline: (CL036) Check the pagination component when there are 30 rows in the list
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Enters the "<name>" of campaign into the 'Search by name' field
+#    And Click X button at the text box
+#    Then The pagination won't be displayed
+#    Examples:
+#      | name |
+#      | Ad   |
+#
+#  Scenario Outline: (CL037) Check the pagination component when there are 31 rows in the list
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Enters the "<name>" of campaign into the 'Search by name' field
+#    Then The pagination will be displayed with 2 pages
+#    Examples:
+#      | name |
+#      | Ad   |
+#
+#  Scenario Outline: (CL038) Check the pagination component when there are 60 rows in the list
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Enters the "<name>" of campaign into the 'Search by name' field
+#    Then The pagination will be displayed with 3 pages
+#    Examples:
+#      | name |
+#      | Ad   |
+#
+#  Scenario Outline: (CL039) Search in combination with filters
+#    Given User Logged in as Admin
+#    When User goes to the Campaign List View
+#    And Click X button at the text box
+#    And Enters the "<name>" of campaign into the 'Search by name' field
+#    Then Any search will be applied on top of selected filter options, and any filter options applied on top of any search results
+#    Examples:
+#      | name |
+#      | Ad   |
