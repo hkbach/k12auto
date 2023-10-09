@@ -18,7 +18,9 @@ public class listCampaigns {
     public listCampaigns(WebDriver driver) {
         this.driver = driver;
     }
-
+    public static void main(){
+        //Finance
+    }
 
     public static WebElement filter() {
         element = driver.findElement(By.xpath("/html/body/div[2]/div[3]"));
@@ -162,5 +164,15 @@ public class listCampaigns {
         System.out.println(totalColum);
 
         return header;
+    }
+
+    public static WebElement txt_search() {
+        element = driver.findElement(By.xpath("//input[@aria-label='Search Input']"));
+        return element;
+    }
+
+    public static WebElement btn_X_atSearchTextbox() {
+        element = driver.findElement(By.xpath("//button[@fdprocessedid='gmxmea']"));
+        return element;
     }
 }

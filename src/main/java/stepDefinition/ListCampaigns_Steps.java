@@ -5,18 +5,17 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.apache.http.impl.io.SessionOutputBufferImpl;
-import org.apache.http.impl.io.SocketOutputBuffer;
+import net.bytebuddy.asm.Advice;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.w3c.dom.Text;
 import pageObjects.listCampaigns;
 import pageObjects.login;
 import utils.libs.TestBase;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.security.Key;
+import java.security.KeyStore;
 import java.util.List;
 
 public class ListCampaigns_Steps extends TestBase {
@@ -81,17 +80,17 @@ public class ListCampaigns_Steps extends TestBase {
         cp.btn_X().click();
     }
 
-
     @And("^At Finance, user enters number into the \"([^\"]*)\" field$")//to Finance
-    public void atFinanceUserEntersNumberIntoTheField(String arg0) {
+    public void atFinanceUserEntersNumberIntoTheField(int toF) {
         // Write code here that turns the phrase above into concrete actions
-        cp.txt_toF().sendKeys(arg0);
+
+        cp.txt_toF().sendKeys(toF + "");
     }
 
     @And("^Enters number into the \"([^\"]*)\" field at Finance$")//from Finance
-    public void entersNumberIntoTheFieldAtFinance(String arg0) {
+    public void entersNumberIntoTheFieldAtFinance(int fromF) {
         // Write code here that turns the phrase above into concrete actions
-        cp.txt_fromF().sendKeys(arg0);
+        cp.txt_fromF().sendKeys(fromF + "");
     }
 
     @And("^At Finance, user enters number is negative into the To field$")
@@ -111,14 +110,19 @@ public class ListCampaigns_Steps extends TestBase {
 
     }
 
-    @And("^At the Investment filter, user enters number into the \"([^\"]*)\" field$")
-    public void atTheInvestmentFilterUserEntersNumberIntoTheField(String arg0) {
-        cp.txt_toI().sendKeys(arg0);
+    //Investment
+
+    @And("^At the Investment filter, user enters number into the \"([^\"]*)\" field$") //to ivestment
+    public void atTheInvestmentFilterUserEntersNumberIntoTheField(int toI) {
+        cp.txt_toI().sendKeys(toI + "");
     }
 
+
+
     @And("^Enters number into the \"([^\"]*)\" field at investment$")
-    public void entersNumberIntoTheFieldAtInvestment(String arg0) {
-        cp.txt_fromI().sendKeys(arg0);
+    public void entersNumberIntoTheFieldAtInvestment(int fromI) {
+
+        cp.txt_fromI().sendKeys(fromI + "");
     }
 
     @And("^At the Investment filter, user enters negative number into the To field$")
@@ -237,30 +241,14 @@ public class ListCampaigns_Steps extends TestBase {
             Assert.assertEquals(expected2, actual2);
         }
 
-//        cp.btn_filter().click();
-//        Thread.sleep(1000);
-//        //tạo 1 list chứa tất cả các checkbox
-//        List<WebElement> webElementList_checkbox = cp.checkBox_checked();
-//            //chạy vòng lặp để check các checkbox
-//            for (int i = 0; i < webElementList_checkbox.size(); i++) {
-//                //check xem các check box nào cần text
-//                // get text ra tìm xem cái nào là checkbox cần ktra, tạidđó check xem checkbox nào đc selected
-//                webElementList_checkbox.get(i).isSelected();
-//            boolean expected = true;
-//            Assert.assertEquals(expected, actual);
-//        }
     }
-
-    @Then("^The list of campaigns will be filtered and just displays the campaigns which on \"([^\"]*)\" status$")
-    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichOnStatus(String checkbox) throws Throwable {
+    public void checkValueStatus(String checkbox) throws Throwable{
         System.out.println(cp.btn_lastPage().getText()); //check
-
         int totalPage = Integer.parseInt(cp.btn_lastPage().getText());        // xác định số trang, chuyểnn số trang sang chữ số
 
+        List<WebElement> row_per_page = driver.findElements(By.xpath("//tr[@class='MuiTableRow-root css-1gqug66']"));
+        //Tạo list chứa các đối tượng WebElement <tr>
         if (totalPage == 1) {
-            List<WebElement> row_per_page = driver.findElements(By.xpath("//tr[@class='MuiTableRow-root css-1gqug66']"));
-            //Tạo list chứa các đối tượng WebElement <tr>
-            Thread.sleep(1000);
 
             for (int i = 1; i <= row_per_page.size(); i++) {
                 WebElement statusCheck = driver.findElement(By.xpath("//tbody/tr[" + i + "]/th[1]")); //chạy từng dòng để check cột status
@@ -269,34 +257,25 @@ public class ListCampaigns_Steps extends TestBase {
                 Assert.assertEquals(expected, actual);
             }
         } else {
-            int page_temp = totalPage - 1;
+
             // số trang trước trang cuối
 
-            for (int j = 1; j < page_temp; j++) {
+            for (int j = 1; j < totalPage; j++) {
                 for (int i = 1; i <= 30; i++) {
                     WebElement statusCheck = driver.findElement(By.xpath("//tbody/tr[" + i + "]/th[1]"));
                     actual = statusCheck.getText();
                     System.out.println(actual);
                     expected = checkbox;
                     Assert.assertEquals(expected, actual);
-
                 }
-                // if(j==page_temp) return ; //khi return thif sẽ k chạy các dòng phía sau return nữa
+                if(j==totalPage) return ; //khi return thif sẽ k chạy các dòng phía sau return nữa
                 cp.btn_nextPage().click();
             }
-
-            //check tại trang cuối
-            List<WebElement> row_per_page = driver.findElements(By.xpath("//tr[@class='MuiTableRow-root css-1gqug66']"));
-            //Tạo list chứa các đối tượng WebElement <tr>
-            Thread.sleep(1000);
-
-            for (int i = 1; i <= row_per_page.size(); i++) {
-                WebElement statusCheck = driver.findElement(By.xpath("//tbody/tr[" + i + "]/th[1]"));
-                actual = statusCheck.getText();
-                expected = checkbox;
-                Assert.assertEquals(expected, actual);
-            }
         }
+    }
+    @Then("^The list of campaigns will be filtered and just displays the campaigns which on \"([^\"]*)\" status$")
+    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichOnStatus(String checkbox) throws Throwable {
+        checkValueStatus(checkbox);
     }
 //finance error
 
@@ -325,20 +304,21 @@ public class ListCampaigns_Steps extends TestBase {
         Assert.assertEquals(expected, actual);
     }
 
-    @Then("^The list of campaigns will be filtered and just displays the campaigns which contain the finance volume in the range of the filter$")
-    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichContainTheFinanceVolumeInTheRangeOfTheFilter(int to, int from) throws  Throwable{
+
+    public void checkValueFinance(int fromF, int toF) throws Throwable {
         int totalPage = Integer.parseInt(cp.btn_lastPage().getText());        // xác định số trang, chuyểnn số trang sang chữ số
 
         List<WebElement> row_per_page = driver.findElements(By.xpath("//tr[@class='MuiTableRow-root css-1gqug66']"));
+
         if (totalPage == 1) {
             //Tạo list chứa các đối tượng WebElement <tr>
             Thread.sleep(1000);
 
             for (int i = 1; i <= row_per_page.size(); i++) {
                 WebElement financeCheck = driver.findElement(By.xpath("//tbody/tr[" + i + "]/th[4]"));
-                boolean expected1=true;
+                boolean expected1 = true;
                 boolean actual1;
-                String finance1="";
+                String finance1 = "";
 
                 String[] listFinance = financeCheck.getText().split("€")[0].split(",");
                 for (int j = 0; j < listFinance.length; j++) { //dùng vòng for cộng các phần tử lại đểdđược chuỗi finance
@@ -346,10 +326,10 @@ public class ListCampaigns_Steps extends TestBase {
                 }
                 System.out.println(finance1); //check
                 int finance = Integer.parseInt(finance1); //đổi string sang int
-                if(finance<=from && finance>=to){ //check đk
-                    actual1=true;
-                }else {
-                    actual1=false;
+                if (finance <= fromF && finance >= toF) { //check đk
+                    actual1 = true;
+                } else {
+                    actual1 = false;
                 }
                 Assert.assertEquals(expected1, actual1);
             }
@@ -358,29 +338,36 @@ public class ListCampaigns_Steps extends TestBase {
             for (int m = 1; m < totalPage; m++) {
                 for (int i = 1; i <= row_per_page.size(); i++) {
                     WebElement financeCheck = driver.findElement(By.xpath("//tbody/tr[" + i + "]/th[4]"));
-                    boolean expected1=true;
+                    boolean expected1 = true;
                     boolean actual1;
-                    String finance1="";
+                    String finance1 = "";
                     String[] listFinance = financeCheck.getText().split("€")[0].split(",");
                     for (int j = 0; j < listFinance.length; j++) {
                         finance1 += listFinance[i];
                     }
                     System.out.println(finance1); //check
                     int finance = Integer.parseInt(finance1);
-                    if(finance<=from && finance>=to){
-                        actual1=true;
-                    }else {
-                        actual1=false;
+                    if (finance <= fromF && finance >= toF) {
+                        actual1 = true;
+                    } else {
+                        actual1 = false;
                     }
                     Assert.assertEquals(expected1, actual1);
                 }
-                if(m==totalPage) return ; //khi return thif sẽ k chạy các dòng phía sau return nữa
+                if (m == totalPage) return; //khi return thif sẽ k chạy các dòng phía sau return nữa
                 cp.btn_nextPage().click();
             }
             Thread.sleep(1000);
         }
+
+
     }
 
+    @Then("^The list of campaigns will be filtered and just displays the campaigns which contain the finance volume in the range \"([^\"]*)\" to \"([^\"]*)\" of the filter$")
+    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichContainTheFinanceVolumeInTheRangeToOfTheFilter(String arg0, String arg1) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        checkValueFinance(Integer.parseInt(arg0),Integer.parseInt(arg1));
+    }
 
 
 //investment error
@@ -406,12 +393,6 @@ public class ListCampaigns_Steps extends TestBase {
         Assert.assertEquals(expected, actual);
     }
 
-    @Then("^The list of campaigns will be filtered and just displays the campaigns which contain the Investment in the range of the filter$")
-    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichContainTheInvestmentInTheRangeOfTheFilter() {
-        actual = cp.error_investment().getText().toString();
-        expected = "";
-        Assert.assertEquals(expected, actual);
-    }
 
     @Then("^All previously selected filters \"([^\"]*)\" are removed and the Campaigns list return to its original stat instantly and the filter panel is Closed$")
     public void allPreviouslySelectedFiltersAreRemovedAndTheCampaignsListReturnToItsOriginalStatInstantlyAndTheFilterPanelIsClosed(String checkbox) {
@@ -466,7 +447,143 @@ public class ListCampaigns_Steps extends TestBase {
 
         }
     }
+
+    public void checkValueInvestment(int fromI, int toI) throws Throwable {
+        int totalPage = Integer.parseInt(cp.btn_lastPage().getText());        // xác định số trang, chuyểnn số trang sang chữ số
+
+        List<WebElement> row_per_page = driver.findElements(By.xpath("//tr[@class='MuiTableRow-root css-1gqug66']"));
+        if (totalPage == 1) {
+            //Tạo list chứa các đối tượng WebElement <tr>
+            Thread.sleep(1000);
+
+            for (int i = 1; i <= row_per_page.size(); i++) {
+                WebElement investmentCheck = driver.findElement(By.xpath("//tbody/tr[" + i + "]/th[3]"));
+                boolean expected1 = true;
+                boolean actual1;
+                String investment1 = "";
+
+                String[] listValueInvestment = investmentCheck.getText().split("€")[0].split(",");
+                for (int j = 0; j < listValueInvestment.length; j++) { //dùng vòng for cộng các phần tử lại đểdđược chuỗi finance
+                    investment1 += listValueInvestment[i];
+                }
+                System.out.println(investment1); //check
+                int investment = Integer.parseInt(investment1); //đổi string sang int
+                if (investment <= fromI && investment >= toI) { //check đk
+                    actual1 = true;
+                } else {
+                    actual1 = false;
+                }
+                Assert.assertEquals(expected1, actual1);
+            }
+        } else {
+            // số trang trước trang cuối
+            for (int m = 1; m < totalPage; m++) {
+                for (int i = 1; i <= row_per_page.size(); i++) {
+                    WebElement investmentCheck = driver.findElement(By.xpath("//tbody/tr[" + i + "]/th[3]"));
+                    boolean expected1 = true;
+                    boolean actual1;
+                    String investment1 = "";
+                    String[] listFinance = investmentCheck.getText().split("€")[0].split(",");
+                    for (int j = 0; j < listFinance.length; j++) {
+                        investment1 += listFinance[i];
+                    }
+                    System.out.println(investment1); //check
+                    int finance = Integer.parseInt(investment1);
+                    if (finance <= fromI && finance >= toI) {
+                        actual1 = true;
+                    } else {
+                        actual1 = false;
+                    }
+                    Assert.assertEquals(expected1, actual1);
+                }
+                if (m == totalPage) return; //khi return thif sẽ k chạy các dòng phía sau return nữa
+                cp.btn_nextPage().click();
+            }
+            Thread.sleep(1000);
+        }
+    }
+
+
+
+
+    @Then("^The list of campaigns will be filtered and just displays the campaigns which mapping with the filter condition \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichMappingWithTheFilterCondition(String country, String Status, String InvestmentTo, String InvestmentFrom, String FinanceFrom, String FinanceTo) throws Throwable {
+        //Country: Không biết verify country, vì hiển thị kết quả là icon lá cờ
+        checkValueInvestment(Integer.parseInt(InvestmentTo),Integer.parseInt(InvestmentFrom));
+        checkValueFinance(Integer.parseInt(FinanceFrom),Integer.parseInt(FinanceTo));
+        checkValueStatus(Status);
+    }
+
+
+    @Then("^The list of campaigns will be filtered and just displays the campaigns which contain the Investment in the range \"([^\"]*)\" to \"([^\"]*)\"  of the filter$")
+    public void theListOfCampaignsWillBeFilteredAndJustDisplaysTheCampaignsWhichContainTheInvestmentInTheRangeToOfTheFilter(String arg0, String arg1) throws Throwable {
+        checkValueInvestment(Integer.parseInt(arg0),Integer.parseInt(arg1));
+        throw new PendingException();
+    }
+//search
+    @And("^Check the initialized data of the search textbox$")
+    public void checkTheInitializedDataOfTheSearchTextbox() {
+        actual= cp.txt_search().getAttribute("value");
+        expected="";
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Then("^The text box is displayed as blank and the placeholder should be \"([^\"]*)\"$")
+    public void theTextBoxIsDisplayedAsBlankAndThePlaceholderShouldBe(String arg0)   {
+         actual= cp.txt_search().getAttribute("placeholder");
+         expected="Search by name";
+         Assert.assertEquals(expected,actual);
+    }
+
+    @And("^Enters the \"([^\"]*)\" of campaign into the 'Search by name' field$")
+    public void entersTheOfCampaignIntoTheSearchByNameField(String arg0) throws Throwable {
+        cp.txt_search().sendKeys(arg0);
+        cp.txt_search().sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+    }
+    public void checkValueName(String name) throws Throwable {
+        int totalPage = Integer.parseInt(cp.btn_lastPage().getText());        // xác định số trang, chuyểnn số trang sang chữ số
+
+        List<WebElement> row_per_page = driver.findElements(By.xpath("//tr[@class='MuiTableRow-root css-1gqug66']"));
+        if (totalPage == 1) {
+            //Tạo list chứa các đối tượng WebElement <tr>
+            Thread.sleep(1000);
+
+            for (int row = 1; row <= row_per_page.size(); row++) {
+                WebElement nameCheck = driver.findElement(By.xpath("//tbody/tr["+row+"]/th[2]/a[1]"));
+                boolean actual=nameCheck.getText().contains(name);
+                boolean expected = true;
+                Assert.assertEquals(expected, actual);
+            }
+        } else {
+
+            for (int m = 1; m < totalPage; m++) {
+                for (int row = 1; row <= row_per_page.size(); row++) {
+                    WebElement nameCheck = driver.findElement(By.xpath("//tbody/tr["+row+"]/th[2]/a[1]"));
+                    boolean actual=nameCheck.getText().contains(name);
+                    boolean expected = true;
+                    Assert.assertEquals(expected, actual);
+                    }
+
+                if (m == totalPage) return;
+                cp.btn_nextPage().click();
+            }
+            Thread.sleep(1000);
+        }
+    }
+    @Then("^The campaigns list will be filtered and shows the campaign which named contains the \"([^\"]*)\" characters Query %LIKE%$")
+    public void theCampaignsListWillBeFilteredAndShowsTheCampaignWhichNamedContainsTheCharactersQueryLIKE(String name) throws Throwable {
+        checkValueName(name);
+        Thread.sleep(1000);
+    }
+
+    @And("^Click X button at the text box$")
+    public void clickXButtonAtTheTextbox() throws Throwable {
+        cp.btn_X_atSearchTextbox().click();
+        Thread.sleep(1000);
+    }
 }
+
 
 
 
