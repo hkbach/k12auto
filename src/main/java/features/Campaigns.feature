@@ -67,6 +67,48 @@ Feature: User action on the list of campaigns
 #    Then The error message will be displayed at Finance as user can enter positive number only
 
 
+
+
+
+
+# Scenario Outline: (01) User logged in successfully
+#   Given User is at the login popup
+#   When User input into the "<Username>" field
+#   And User input into the "<Password>" field
+#   And User click 'Login' button
+#   Then The homepage screeen will be displayed
+#   Examples:
+#      |Username|Password|
+#      |gohan|123456|
+#      |goku|666666|
+
+# Scenario Outline: (02) User login failed
+#   Given User is at the login popup
+#   When User input into the "<Username>" field
+#   And User input into the "<Password>" field
+#   And User click 'Login' button
+#   Then User login failed
+#   Examples:
+#      |Username|Password|
+#      |gohankkkk|123456|
+#      |goku|66662325|
+
+# Scenario Outline: (03) User login failed and close login popup when click 'X' button
+#   Given User is at the login popup
+#   When User input into the "<Password>" field
+#   And User input into the "<Username>" field
+#   And User click 'X' button
+#   Then close login popup and User login in unsuccessful
+#   Examples:
+#      |Username|Password|
+#      |gohan|123456|
+#      |goku|666665|
+
+
+
+
+
+
 #  Scenario Outline: (CL020) User tries to filter the Campaigns by Finance volume while entering valid number into "From" and "To" fields
 #    Given User Logged in as Admin
 #    When User goes to the Campaign List View
